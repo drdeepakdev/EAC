@@ -8,12 +8,14 @@ Outsourcing.
 
 > *"We show up. We follow through."*
 
-## Design
+## Design — "Signal & Paper" (v2)
 
-An Accenture-inspired, editorial-technology visual language — deliberately
-built without stock photography. Every visual (hero, case studies, portfolio,
-careers) is original CSS/SVG art in the brand's own black-and-red language,
-not a generic Unsplash/AI-slop treatment:
+The current homepage is a ground-up redesign chosen from five explored
+creative directions (see `DIRECTIONS.md`): a warm-paper editorial site with
+serif display type (Fraunces), mono annotations, hairline ledger structure,
+and exactly one dark "signal" band — set in the official dark logo colors —
+where the technology proof lives. The previous dark build is archived at
+`v1.html`. Principles carried over from v1:
 
 - **Official brand palette** taken from the EAims-2 vector sources: signature
   red `#9E0000`, near-black `#0a0807`, grays `#0F0F0F` / `#646464` — matching
