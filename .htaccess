@@ -2,11 +2,14 @@
 # (GitHub Pages ignores this file; it activates when the site is hosted
 #  on the expertaims.com cPanel server.)
 
-# Force HTTPS + canonical www
+# Force HTTPS + canonical www — ONLY on the production domain, so preview
+# deployments (e.g. clients.expertaims.in/eac) are left untouched.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^expertaims\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.expertaims.com/$1 [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.expertaims\.com$ [NC]
+  RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://www.expertaims.com/$1 [L,R=301]
 </IfModule>
 
