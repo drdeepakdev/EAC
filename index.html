@@ -1151,6 +1151,29 @@ html[data-theme="light"] .ticker { background:#100c0b; }
 .about-badge { margin-top:20px; display:inline-flex; align-items:center; gap:9px; font-size:12px; font-weight:600; color:#1a1414; background:var(--off-white); border:1px solid #e0dace; border-radius:22px; padding:8px 15px; }
 .about-badge span { width:8px; height:8px; border-radius:50%; background:#1f9d55; }
 
+/* SCROLL PROGRESS */
+#scrollBar { position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg, var(--accent), #ff5a5a); z-index:200; transition:width .1s linear; }
+
+/* SCROLLSPY ACTIVE NAV */
+.nav-link.active { border-bottom-color:var(--accent); color:var(--accent); }
+
+/* CLIENT TESTIMONIALS */
+.testi-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:920px; margin:56px auto 0; text-align:left; }
+.testi { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:26px 26px 22px; position:relative; }
+.testi::before { content:'“'; position:absolute; top:10px; right:20px; font-family:var(--font-display); font-size:64px; line-height:1; color:rgba(176,16,16,0.35); }
+.testi blockquote { font-size:14.5px; line-height:1.75; color:rgba(255,255,255,0.72); margin:0 0 18px; }
+.testi figcaption { display:flex; flex-direction:column; gap:2px; }
+.testi figcaption b { font-size:13.5px; color:#fff; }
+.testi figcaption span { font-size:12px; color:rgba(255,255,255,0.45); }
+html[data-theme="light"] .testi { background:#fff; border-color:rgba(0,0,0,0.1); }
+html[data-theme="light"] .testi blockquote { color:rgba(0,0,0,0.65); }
+html[data-theme="light"] .testi figcaption b { color:#111; }
+html[data-theme="light"] .testi figcaption span { color:rgba(0,0,0,0.45); }
+@media (max-width:760px){ .testi-grid { grid-template-columns:1fr; } }
+
+/* MAGNETIC CTAs */
+.btn-primary, .nav-cta-btn { will-change:transform; }
+
 /* CAPABILITY ATLAS */
 #atlas { background:var(--black); padding:110px 40px; position:relative; overflow:hidden; }
 #atlas::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 55% 60% at 72% 50%, rgba(176,16,16,0.10) 0%, transparent 65%); pointer-events:none; }
@@ -1331,6 +1354,7 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
 <body>
 
 <!-- ─────────────────────────── NAV ─────────────────────────── -->
+<div id="scrollBar" aria-hidden="true"></div>
 <nav id="nav">
   <div class="nav-logo" id="navLogo">
     <img class="logo-e" src="assets/brand/logo-e.png" width="150" height="250" alt="ExpertAims">
@@ -1624,6 +1648,17 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
   <div class="quote-attr">
     <div class="quote-attr-name">ExpertAims Leadership Team</div>
     <div class="quote-attr-title">Serving clients worldwide</div>
+  </div>
+
+  <div class="testi-grid">
+    <figure class="testi">
+      <blockquote>"ExpertAims actually listened before they started building, which sounds basic but isn't common. The marketing approach they came back with was sharper than anything our last two agencies pitched."</blockquote>
+      <figcaption><b>Kidz Nursery</b><span>Kuwait — Education</span></figcaption>
+    </figure>
+    <figure class="testi">
+      <blockquote>"We'd been burned by a previous web vendor who disappeared mid-project. ExpertAims delivered on the date they promised, no chasing required. That alone earned the repeat business."</blockquote>
+      <figcaption><b>Onetech Computers</b><span>Kuwait — Technology</span></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -2361,6 +2396,80 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
   el("circle", { cx: CX, cy: CY, r: 34, "class": "core-pulse" }, svg);
   el("circle", { cx: CX, cy: CY, r: 30, fill: "#1a0d0c", stroke: "#B01010", "stroke-width": "1.5" }, svg);
   el("image", { href: "assets/brand/logo-e.png", x: CX - 12, y: CY - 17, width: 24, height: 34 }, svg);
+})();
+// Scroll progress bar
+(function(){
+  var bar = document.getElementById("scrollBar"); if(!bar) return;
+  function upd(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", upd, { passive: true });
+  window.addEventListener("resize", upd);
+  upd();
+})();
+// Scrollspy — highlight the nav link for the section in view
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll("#nav .nav-link"));
+  if(!links.length || !("IntersectionObserver" in window)) return;
+  var map = {};
+  var targets = [];
+  links.forEach(function(l){
+    var id = (l.getAttribute("href") || "").slice(1);
+    var t = id && document.getElementById(id);
+    if (t) { map[id] = l; targets.push(t); }
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        links.forEach(function(l){ l.classList.remove("active"); });
+        var l = map[e.target.id];
+        if (l) l.classList.add("active");
+      }
+    });
+  }, { rootMargin: "-35% 0px -55% 0px" });
+  targets.forEach(function(t){ obs.observe(t); });
+})();
+// Count-up stats — animates "12+", "15K+", "100%" when scrolled into view
+(function(){
+  var nums = document.querySelectorAll(".stat-num");
+  if(!nums.length) return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting || e.target.dataset.done) return;
+      e.target.dataset.done = "1";
+      var textNode = e.target.firstChild;
+      var raw = textNode.nodeValue.trim();
+      var m = raw.match(/^(\d+)([A-Za-z]*)$/);
+      if (!m) return;
+      var end = parseInt(m[1], 10), suffix = m[2], t0 = null;
+      function step(ts){
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / 1200, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        textNode.nodeValue = Math.round(end * eased) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(function(n){ obs.observe(n); });
+})();
+// Magnetic CTAs — buttons lean gently toward the cursor
+(function(){
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(hover: none)").matches) return;
+  document.querySelectorAll(".btn-primary, .nav-cta-btn").forEach(function(btn){
+    btn.addEventListener("mousemove", function(e){
+      var r = btn.getBoundingClientRect();
+      var dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+      var dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+      btn.style.transform = "translate(" + (dx * 4).toFixed(1) + "px," + (dy * 3).toFixed(1) + "px)";
+    });
+    btn.addEventListener("mouseleave", function(){ btn.style.transform = ""; });
+  });
 })();
 </script>
 </body>
