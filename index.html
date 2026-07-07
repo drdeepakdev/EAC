@@ -1414,6 +1414,18 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
 .svc-ic { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(158,0,0,0.13); color:var(--accent); margin-bottom:2px; transition:background .22s, transform .22s; }
 .svc-ic svg { width:20px; height:20px; }
 .svc-card:hover .svc-ic { background:rgba(158,0,0,0.22); transform:translateY(-1px); }
+
+/* PRINT */
+@media print {
+  #nav, .mobile-nav, #scrollBar, .skip-link, #toTop, #cookieBar, .theme-btn,
+  #hero .hero-fx, .hero-grad-blob, .hero-grain, .hero-particles, .hero-glow,
+  .ticker, #logo3dWrap, #logo3dGlow, .hero-slide-nav, .hero-btn-row,
+  #atlas, .cases-controls, #stay-ahead, .dock, .cf-submit, .vac-apply { display:none !important; }
+  body { background:#fff !important; color:#000 !important; }
+  section, footer { background:#fff !important; color:#000 !important; padding:24px 0 !important; opacity:1 !important; transform:none !important; }
+  h1, h2, h3, h4, p, li, span, div { color:#000 !important; }
+  a { color:#000 !important; text-decoration:underline; }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1917,6 +1929,15 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
           <div class="case-card-stat">28% cost reduction</div>
         </div>
       </div>
+      <div class="case-card">
+        <div class="case-card-bg" style="--gx:35%;--gy:30%;--ga:120deg"><span class="art-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><rect x="10" y="13" width="4" height="6"/></svg></span></div>
+        <div class="case-card-overlay"></div>
+        <div class="case-card-body">
+          <div class="case-card-tag">Real Estate · Kuwait</div>
+          <div class="case-card-title">3QARQ8 property marketplace connects buyers and agents across the Kuwait real-estate market</div>
+          <div class="case-card-stat">Faster listing to close</div>
+        </div>
+      </div>
     </div>
     <div class="cases-controls">
       <div class="cases-btn" id="casePrev">&#8592;</div>
@@ -1926,6 +1947,7 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
         <div class="cases-dot" data-i="1"></div>
         <div class="cases-dot" data-i="2"></div>
         <div class="cases-dot" data-i="3"></div>
+        <div class="cases-dot" data-i="4"></div>
       </div>
     </div>
   </div>
