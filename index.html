@@ -23,8 +23,9 @@
 <meta name="twitter:title" content="ExpertAims Consultancy | We Show Up. We Follow Through.">
 <meta name="twitter:description" content="An international IT consultancy — 15,000+ projects delivered for clients worldwide.">
 <meta name="twitter:image" content="https://www.expertaims.com/assets/brand/og-image.png">
-<link rel="icon" type="image/png" href="assets/brand/logo-e.png">
-<link rel="apple-touch-icon" href="assets/brand/logo-e.png">
+<link rel="icon" type="image/svg+xml" href="assets/brand/logo-e.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -171,15 +172,15 @@ img { display: block; max-width: 100%; }
   position: relative; z-index: 1;
   flex: 0 0 60%; max-width: 60%;
 }
-.hero-headline h1 {
+.hero-headline h1, .hero-headline .hero-h {
   font-size: clamp(68px, 7.5vw, 115px);
   font-weight: 900; line-height: 0.88;
   letter-spacing: -0.025em; text-transform: uppercase;
-  color: var(--white); word-break: break-word;
+  color: var(--white);
   position: relative; z-index: 1; text-wrap: balance;
 }
-.hero-headline h1 .accent-word {
-  color: var(--accent); font-style: normal;
+.hero-headline h1 .accent-word, .hero-headline .hero-h .accent-word {
+  color: var(--accent); font-style: normal; white-space: nowrap;
   position: relative; display: inline-block;
 }
 
@@ -888,7 +889,7 @@ footer {
   .nav-links { display: none; }
   .hero-main { flex-direction: column; gap: 40px; padding: 40px 20px 32px; }
   .hero-headline { flex: none; max-width: none; }
-  .hero-headline h1 { font-size: clamp(48px, 12vw, 80px); }
+  .hero-headline h1, .hero-headline .hero-h { font-size: clamp(48px, 12vw, 80px); }
   .hero-panel { max-width: none; margin-left: 0; }
   .cards-strip { padding: 0 20px 32px; }
   .c-card { flex: 0 0 280px; }
@@ -1443,6 +1444,20 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How do we start a project with ExpertAims?", "acceptedAnswer": { "@type": "Answer", "text": "Use the enquiry form, email, or call the nearest office. Describe what you are trying to build or fix, and we reply within one working day with the questions that matter and a suggested next step." } },
+    { "@type": "Question", "name": "What information do you need for an accurate quote?", "acceptedAnswer": { "@type": "Answer", "text": "A brief project overview: goals, audience, and what success looks like. Reference sites, an indicative budget, and a target live date help us propose something realistic, but none are required to start." } },
+    { "@type": "Question", "name": "Can you take over or update an existing website or system?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A large share of our work starts as a rescue or upgrade of something another vendor built. We audit what exists, advise what is worth keeping, and plan the update so the business keeps running." } },
+    { "@type": "Question", "name": "Does your work integrate with existing business systems?", "acceptedAnswer": { "@type": "Answer", "text": "System integration is one of our founding competencies. New builds are designed to plug into your existing ERP, payment, database, or portal infrastructure." } },
+    { "@type": "Question", "name": "Do you work with clients outside India, Malaysia and Kuwait?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The three offices are delivery hubs, not boundaries. We have served clients worldwide since 2012 with remote delivery and cross-timezone support under one ISO-certified standard." } },
+    { "@type": "Question", "name": "Is shared information kept confidential?", "acceptedAnswer": { "@type": "Answer", "text": "Strictly. All project details, documents, and budgets are confidential and never disclosed without prior consent. We are happy to sign an NDA before the first conversation." } }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#about">Skip to content</a>
@@ -1504,11 +1519,11 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
           <p class="hero-slide-sub">Infrastructure, software, and consulting delivered with uncompromised integrity — serving a growing customer base since 2012.</p>
         </div>
         <div class="hero-slide">
-          <h1>QUALITY IS<br>THE <em class="accent-word">CONTRACT<span class="aim-dot" aria-hidden="true"></span></em></h1>
+          <h2 class="hero-h">QUALITY IS<br>THE <em class="accent-word">CONTRACT<span class="aim-dot" aria-hidden="true"></span></em></h2>
           <p class="hero-slide-sub">ISO 9001:2008 certified, with an unwavering focus on 100% customer satisfaction. We commit to dates we can keep and a quality bar we don't negotiate.</p>
         </div>
         <div class="hero-slide">
-          <h1>15,000+ PROJECTS.<br>ONE <em class="accent-word">STANDARD<span class="aim-dot" aria-hidden="true"></span></em></h1>
+          <h2 class="hero-h">15,000+ PROJECTS.<br>ONE <em class="accent-word">STANDARD<span class="aim-dot" aria-hidden="true"></span></em></h2>
           <p class="hero-slide-sub">Delivered for clients around the world — an international team working to one ISO-certified standard, wherever the work is.</p>
         </div>
       </div>
@@ -2383,14 +2398,17 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
     note.textContent="Email draft opened \u2014 attach your CV and hit send."; note.style.color="#1f9d55";
   });
 })();
-// Newsletter — basic email check (present on full variant only)
+// Newsletter — validates, then opens a subscription email draft
 (function(){
   var f=document.querySelector(".stay-form"); if(!f) return;
   var inp=f.querySelector(".stay-input"), btn=f.querySelector(".stay-submit");
   btn.addEventListener("click",function(){
-    var ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(inp.value.trim());
+    var v=inp.value.trim();
+    var ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
     inp.classList.toggle("bad", !ok);
-    if(ok){ btn.textContent="Subscribed"; inp.value=""; }
+    if(!ok) return;
+    window.location.href="mailto:info@expertaims.com?subject="+encodeURIComponent("Newsletter subscription")+"&body="+encodeURIComponent("Please add "+v+" to the ExpertAims insights mailing list.");
+    btn.textContent="Draft opened \u2014 hit send"; inp.value="";
   });
 })();
 // Theme toggle — flips theme and remembers the choice
