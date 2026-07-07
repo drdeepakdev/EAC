@@ -1154,6 +1154,38 @@ html[data-theme="light"] .ticker { background:#100c0b; }
 /* SCROLL PROGRESS */
 #scrollBar { position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg, var(--accent), #ff5a5a); z-index:200; transition:width .1s linear; }
 
+/* MOBILE MENU */
+.menu-btn { display:none; width:40px; height:40px; flex-direction:column; align-items:center; justify-content:center; gap:5px; border:1px solid rgba(0,0,0,0.18); border-radius:8px; background:transparent; cursor:pointer; padding:0; flex-shrink:0; }
+.menu-btn span { display:block; width:17px; height:2px; background:#222; border-radius:2px; transition:transform .25s, opacity .2s; }
+.menu-btn.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.menu-btn.open span:nth-child(2){ opacity:0; }
+.menu-btn.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.mobile-nav { position:fixed; top:64px; left:0; right:0; z-index:99; background:#fff; border-bottom:1px solid rgba(0,0,0,0.08); box-shadow:0 24px 48px rgba(0,0,0,0.18); padding:10px 20px 18px; display:none; flex-direction:column; }
+.mobile-nav.open { display:flex; animation:mnavIn .28s cubic-bezier(.22,1,.36,1); }
+@keyframes mnavIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:none; } }
+.mobile-nav a { padding:13px 4px; font-size:15.5px; font-weight:600; color:#222; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.06); }
+.mobile-nav a:last-of-type { border-bottom:none; }
+.mobile-nav a:active, .mobile-nav a:hover { color:var(--accent); }
+.mobile-nav-cta { margin-top:8px; background:var(--accent); color:#fff !important; text-align:center; border-radius:6px; font-weight:700; }
+@media (max-width:768px){ .menu-btn { display:flex; } .nav-cta-btn { display:none; } }
+
+/* INSIGHT ARTICLE MODAL */
+.article-modal { position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:22px; }
+.article-modal[hidden] { display:none; }
+.article-backdrop { position:absolute; inset:0; background:rgba(8,5,4,0.72); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.article-panel { position:relative; max-width:660px; width:100%; max-height:84vh; overflow-y:auto; background:#fff; color:#1a1414; border-radius:16px; padding:38px 40px 34px; box-shadow:0 40px 90px rgba(0,0,0,0.45); animation:artIn .3s cubic-bezier(.22,1,.36,1); }
+@keyframes artIn { from { opacity:0; transform:translateY(18px) scale(.98); } to { opacity:1; transform:none; } }
+.article-close { position:absolute; top:14px; right:16px; width:38px; height:38px; border-radius:50%; border:1px solid rgba(0,0,0,0.14); background:#fff; font-size:20px; line-height:1; color:#444; cursor:pointer; transition:color .2s, border-color .2s; }
+.article-close:hover { color:var(--accent); border-color:var(--accent); }
+.article-tag { font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); }
+.article-panel h3 { font-family:var(--font-display); font-size:clamp(21px,2.6vw,28px); font-weight:800; line-height:1.18; margin:12px 0 18px; letter-spacing:-0.015em; }
+.article-body p { font-size:14.5px; line-height:1.8; color:#4a4442; margin-bottom:14px; }
+.article-body p b { color:#1a1414; }
+.article-cta { display:inline-flex; gap:8px; margin-top:8px; font-size:13.5px; font-weight:700; color:var(--accent); text-decoration:none; transition:gap .2s; }
+.article-cta:hover { gap:13px; }
+@media (max-width:520px){ .article-panel { padding:30px 22px 26px; } }
+@media (prefers-reduced-motion: reduce){ .article-panel, .mobile-nav.open { animation:none; } }
+
 /* SCROLLSPY ACTIVE NAV */
 .nav-link.active { border-bottom-color:var(--accent); color:var(--accent); }
 
@@ -1375,8 +1407,20 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M20.5 13.5A8.5 8.5 0 1110.5 3.5a7 7 0 0010 10z"/><rect x="16.6" y="3.6" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg>
     </button>
     <a class="nav-cta-btn" href="#contact">Get in touch</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#services">What we do</a>
+  <a href="#insights">What we think</a>
+  <a href="#about">Who we are</a>
+  <a href="#atlas">Capability Atlas</a>
+  <a href="#careers-section">Careers</a>
+  <a href="#contact">Contact Us</a>
+  <a class="mobile-nav-cta" href="#contact">Get in touch →</a>
+</div>
 
 
 <!-- ─────────────────────────── HERO ─────────────────────────── -->
@@ -1615,28 +1659,39 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
 <section id="insights">
   <div class="section-eyebrow">What we think</div>
   <div class="insights-grid">
-    <a class="insight-card" href="#contact">
+    <a class="insight-card" href="#insights" data-article="0">
       <div class="insight-tag">Technology</div>
       <h4>AI agents are changing what mid-market IT teams actually need from their vendors</h4>
       <div class="insight-link">Read more →</div>
     </a>
-    <a class="insight-card" href="#contact">
+    <a class="insight-card" href="#insights" data-article="1">
       <div class="insight-tag">Consulting</div>
       <h4>The real cost of a failed ERP migration — and how to avoid becoming a statistic</h4>
       <div class="insight-link">Read more →</div>
     </a>
-    <a class="insight-card" href="#contact">
+    <a class="insight-card" href="#insights" data-article="2">
       <div class="insight-tag">Outsourcing</div>
       <h4>Why the best outsourcing partnerships start with a scope that nobody argues about</h4>
       <div class="insight-link">Read more →</div>
     </a>
-    <a class="insight-card" href="#contact">
+    <a class="insight-card" href="#insights" data-article="3">
       <div class="insight-tag">Leadership</div>
       <h4>Twelve years in consulting: what changes, what never does, and what still surprises us</h4>
       <div class="insight-link">Read more →</div>
     </a>
   </div>
 </section>
+
+<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="artTitle" hidden>
+  <div class="article-backdrop" data-close></div>
+  <article class="article-panel">
+    <button class="article-close" type="button" aria-label="Close article" data-close>&#215;</button>
+    <span class="article-tag" id="artTag"></span>
+    <h3 id="artTitle"></h3>
+    <div class="article-body" id="artBody"></div>
+    <a class="article-cta" href="#contact" data-close>Talk to us about this →</a>
+  </article>
+</div>
 
 
 <!-- ─────────────────────────── QUOTE ─────────────────────────── -->
@@ -2190,7 +2245,7 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
     var e=f.querySelector(".cf-err"); if(e) e.textContent="";
   });
 });
-// Contact form — front-end only, friendly confirmation
+// Contact form — validates, then opens a pre-filled email to info@expertaims.com
 (function(){
   var form=document.getElementById("contactForm"); if(!form) return;
   var note=document.getElementById("cfNote");
@@ -2198,10 +2253,13 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
   form.addEventListener("submit",function(e){
     e.preventDefault();
     if(!eaValidate(form)){ note.textContent="Please fix the highlighted fields."; note.style.color="#b01010"; return; }
-    btn.textContent="Thanks \u2014 we will be in touch"; btn.classList.add("done");
-    note.textContent="Enquiry received. We reply within one working day."; note.style.color="#1f9d55";
-    form.querySelectorAll("input,textarea").forEach(function(i){i.value="";});
-    form.querySelectorAll("select").forEach(function(s){s.selectedIndex=0;});
+    function v(n){ var f=form.querySelector("[name="+n+"]"); return f ? f.value.trim() : ""; }
+    var name=(v("first")+" "+v("last")).trim();
+    var subject="Enquiry \u2014 "+name+(v("company")?" ("+v("company")+")":"");
+    var body="Name: "+name+"\nEmail: "+v("email")+"\nPhone: "+v("phone")+"\nCompany: "+v("company")+"\nLooking to: "+v("ptype")+"\n\nProject overview:\n"+v("msg");
+    window.location.href="mailto:info@expertaims.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+    btn.textContent="Email draft opened \u2014 hit send"; btn.classList.add("done");
+    note.textContent="Your email app has a pre-filled draft to info@expertaims.com \u2014 review and send it. We reply within one working day."; note.style.color="#1f9d55";
   });
 })();
 // Careers apply — validates, then opens a pre-filled email to careers@expertaims.com
@@ -2456,6 +2514,80 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
     });
   }, { threshold: 0.4 });
   nums.forEach(function(n){ obs.observe(n); });
+})();
+// Mobile menu
+(function(){
+  var btn = document.getElementById("menuBtn"), panel = document.getElementById("mobileNav");
+  if(!btn || !panel) return;
+  function setOpen(open){
+    btn.classList.toggle("open", open);
+    panel.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  btn.addEventListener("click", function(){ setOpen(!panel.classList.contains("open")); });
+  panel.addEventListener("click", function(e){ if (e.target.closest("a")) setOpen(false); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") setOpen(false); });
+  window.addEventListener("resize", function(){ if (window.innerWidth > 768) setOpen(false); });
+})();
+// Insight article reader
+(function(){
+  var modal = document.getElementById("articleModal"); if(!modal) return;
+  var ARTICLES = [
+    { tag: "Technology",
+      title: "AI agents are changing what mid-market IT teams actually need from their vendors",
+      body: [
+        "For a decade, the vendor conversation started with headcount: how many developers, how many support seats, how many hours. AI agents change the arithmetic. A mid-market team with the right tooling now ships work that used to need a team twice its size — but only when the underlying systems are clean enough for automation to stand on.",
+        "That is the part most vendors skip. Agents amplify whatever they are pointed at; pointed at an undocumented estate with brittle integrations, they amplify chaos. The unglamorous work — tidy APIs, sane data models, documented processes — has quietly become the highest-leverage IT investment there is.",
+        "<b>Our position:</b> buy outcomes, not seats. Ask every vendor how their delivery changes when an agent can do the first draft, and whether their engineers are reviewing AI output with the same rigour they would review a junior's. The vendors worth keeping have a real answer."
+      ]},
+    { tag: "Consulting",
+      title: "The real cost of a failed ERP migration — and how to avoid becoming a statistic",
+      body: [
+        "The visible cost of a failed migration is the licence and implementation fee. The real cost is eighteen months of your best people reconciling two systems by hand while the business waits, plus decisions delayed because nobody trusts the numbers in either system.",
+        "Failures rarely come from the software. They come from unmodelled processes — the workaround the warehouse team never documented, the discount logic that lives in one veteran's spreadsheet. Migration projects fail in discovery, months before anyone notices.",
+        "<b>What works:</b> map the processes first and put a pro-forma economic model behind every phase, so each stage has to justify itself with numbers before the next begins. If the model doesn't work on paper, it won't work in production — better to learn that in week three than in month fifteen."
+      ]},
+    { tag: "Outsourcing",
+      title: "Why the best outsourcing partnerships start with a scope that nobody argues about",
+      body: [
+        "Every troubled outsourcing engagement we have been asked to rescue had one thing in common: a scope document both sides had signed and neither side had read the same way. Ambiguity is not neutral — it always resolves against the relationship.",
+        "A scope that nobody argues about is not longer; it is more testable. Every line answers a binary question: is this deliverable in or out, done or not done. 'Improve system performance' invites a dispute. 'Checkout completes in under two seconds at 500 concurrent users' invites a measurement.",
+        "<b>The discipline:</b> before signing, both teams independently list what they believe the other side owes them in month one. If the lists don't match, the scope isn't done. Ten minutes of friction up front replaces ten months of it later."
+      ]},
+    { tag: "Leadership",
+      title: "Twelve years in consulting: what changes, what never does, and what still surprises us",
+      body: [
+        "The stack turned over three times since 2012 — on-premise to cloud, monoliths to services, and now AI in everything. What never changed: projects still succeed or fail on whether someone took ownership, told the truth about timelines, and did the unglamorous parts right.",
+        "What still surprises us is how rarely 'we will tell you the truth about the timeline' loses a deal — and how often it wins the second project. Clients forgive honest bad news delivered early; they do not forgive optimistic silence.",
+        "<b>The habit that built the firm:</b> Respect first, responsibility second, ownership third — in that order, because respect without responsibility is politeness, and responsibility without ownership is process theatre. Twelve years in, it is still the whole playbook."
+      ]}
+  ];
+  var tagEl = document.getElementById("artTag"), titleEl = document.getElementById("artTitle"), bodyEl = document.getElementById("artBody");
+  var lastFocus = null;
+  function open(i){
+    var a = ARTICLES[i]; if(!a) return;
+    tagEl.textContent = a.tag;
+    titleEl.textContent = a.title;
+    bodyEl.innerHTML = a.body.map(function(p){ return "<p>" + p + "</p>"; }).join("");
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    modal.querySelector(".article-close").focus();
+  }
+  function close(){
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll(".insight-card[data-article]").forEach(function(card){
+    card.addEventListener("click", function(e){
+      e.preventDefault();
+      open(parseInt(card.getAttribute("data-article"), 10));
+    });
+  });
+  modal.addEventListener("click", function(e){ if (e.target.closest("[data-close]")) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !modal.hidden) close(); });
 })();
 // Magnetic CTAs — buttons lean gently toward the cursor
 (function(){
