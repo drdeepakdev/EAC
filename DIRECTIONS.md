@@ -82,3 +82,27 @@ patterns, and migrate content from the live expertaims.com.
 approved (v3) instead of resetting, and every added element traces to a
 source: sliders and stories from the live site, counters/cards from Infosys,
 theme from the EAims-2 brand files.
+
+## v5 — "The Meridian" (current, full multi-page site)
+Brief: a complete, never-seen site — dedicated pages, menus/submenus,
+scrollers, big and inner banners, light+dark modes, unique type, full
+creative freedom, brand colors first.
+
+Concept: the brand's red signal line drawn continuously through the site;
+every page is a station on the line (scroll-drawn meridian rail, station
+markers, terminus footer). Type: Bricolage Grotesque display + Instrument
+Serif italics + Schibsted Grotesk body + Spline Sans Mono annotations —
+a set no IT template ships. Both themes are first-class token systems in
+the brand palette (porcelain/ink/#9E0000 · charcoal/#F0EDE8/#FF5A4E).
+
+Eight dedicated pages sharing one design system (assets/site.css/js):
+home (kinetic hero, marquee, service + project rails, dark why-band with
+counters, testimonial slider, insights teaser), services (six anchored
+practices + solutions verticals), projects (the real 26-item portfolio
+from the live site with filters + case studies), about, clients &
+industries (interactive), news & insights (six practice articles in an
+accessible reader), innovation (frontier practices + the interactive
+Capability Atlas), and contact (channels, three offices with map links,
+form, FAQ). Content migrated from the live expertaims.com; mega menus on
+desktop, accordion sheet on mobile; WhatsApp everywhere. Prior versions
+remain at v1–v4.html.

@@ -8,15 +8,18 @@ Outsourcing.
 
 > *"We show up. We follow through."*
 
-## Design — "Enterprise Clean" (v3)
+## Design — "The Meridian" (v5, multi-page)
 
-The current homepage follows client-directed references — IBM Consulting,
-Infosys and Accenture — documented in `DIRECTIONS.md`: white ground, sharp
-corners, IBM Plex type, clickable service tiles, a bold typographic hero with
-the system-map panel, problem/solution/outcome case cards, and a
-WhatsApp-forward contact section. Earlier explorations are preserved at
-`v1.html` (dark editorial) and `v2.html` (Signal & Paper). Principles carried
-through every version:
+The current site is a full multi-page build — "The Meridian" — documented in
+`DIRECTIONS.md`: the brand's red signal line drawn continuously through the
+site, every page a station. Eight dedicated pages (home, services, projects,
+about, clients, news, innovation, contact) share one design system
+(`assets/site.css` / `site.js`) with mega menus, horizontal snap rails,
+big and inner banners, a kinetic hero, an interactive Capability Atlas, and
+first-class light + dark themes in the brand palette. Type: Bricolage
+Grotesque · Instrument Serif · Schibsted Grotesk · Spline Sans Mono. Earlier
+versions are preserved at `v1.html`–`v4.html`. Principles carried through
+every version:
 
 - **Official brand palette** taken from the EAims-2 vector sources: signature
   red `#9E0000`, near-black `#0a0807`, grays `#0F0F0F` / `#646464` — matching
