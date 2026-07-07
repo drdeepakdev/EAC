@@ -8,14 +8,15 @@ Outsourcing.
 
 > *"We show up. We follow through."*
 
-## Design — "Signal & Paper" (v2)
+## Design — "Enterprise Clean" (v3)
 
-The current homepage is a ground-up redesign chosen from five explored
-creative directions (see `DIRECTIONS.md`): a warm-paper editorial site with
-serif display type (Fraunces), mono annotations, hairline ledger structure,
-and exactly one dark "signal" band — set in the official dark logo colors —
-where the technology proof lives. The previous dark build is archived at
-`v1.html`. Principles carried over from v1:
+The current homepage follows client-directed references — IBM Consulting,
+Infosys and Accenture — documented in `DIRECTIONS.md`: white ground, sharp
+corners, IBM Plex type, clickable service tiles, a bold typographic hero with
+the system-map panel, problem/solution/outcome case cards, and a
+WhatsApp-forward contact section. Earlier explorations are preserved at
+`v1.html` (dark editorial) and `v2.html` (Signal & Paper). Principles carried
+through every version:
 
 - **Official brand palette** taken from the EAims-2 vector sources: signature
   red `#9E0000`, near-black `#0a0807`, grays `#0F0F0F` / `#646464` — matching

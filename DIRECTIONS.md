@@ -46,3 +46,14 @@ technical evaluator who needs to believe (signal band, system map, mono
 precision) — while staying strictly inside the real brand system. D1's
 layout discipline and D3's schematic drawing style are folded in as
 supporting techniques.
+
+## v3 — "Enterprise Clean" (client-directed, current)
+The client narrowed references to IBM Consulting, Infosys and Accenture and
+supplied the homepage structure. Built accordingly: white ground, sharp
+corners, IBM Plex Sans/Mono, clickable service tiles with arrow affordances
+(IBM), bold typographic hero with the requested headline and split system-map
+panel (Accenture), clean six-service journey (Infosys), problem/solution/
+outcome case cards, trust strip with selected clients, four-point Why band,
+and a WhatsApp-forward contact section listing all three offices. Deliberately
+simpler than TCS/Cognizant per the brief. Previous versions preserved as
+v1.html (dark editorial) and v2.html (Signal & Paper).
