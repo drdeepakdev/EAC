@@ -57,3 +57,28 @@ outcome case cards, trust strip with selected clients, four-point Why band,
 and a WhatsApp-forward contact section listing all three offices. Deliberately
 simpler than TCS/Cognizant per the brief. Previous versions preserved as
 v1.html (dark editorial) and v2.html (Signal & Paper).
+
+## v4 exploration — five directions for the "motion" round
+Brief: keep the logo theme, add sliding hero banners, fold in Infosys
+patterns, and migrate content from the live expertaims.com.
+
+- **E1 — Enterprise Motion** (enterprise IT consultant): the approved v3
+  Enterprise Clean base + a full-width sliding hero (one slide per service
+  story from the live site, rewritten), Infosys-style stat counters, a
+  technology-partners strip (HP/Dell/Cisco/Microsoft/Oracle from the live
+  about page), and the site's real client testimonials.
+- **E2 — Corporate Gradient Premium**: charcoal hero slider with soft red
+  gradients and glass cards. Rejected: drifts back toward the generic
+  dark-gradient template look the project explicitly avoids.
+- **E3 — Creative Tech Agency Motion**: oversized type-per-slide, marquee,
+  asymmetric slabs. Rejected: too loud for M365/AMC corporate buyers.
+- **E4 — SaaS Product Clean**: centered hero, product screenshots.
+  Rejected: wrong genre — ExpertAims sells services, not a product.
+- **E5 — Signal & Paper in Motion**: v2's serif paper look with a slider.
+  Rejected: client already redirected from serif editorial to IBM/Infosys
+  enterprise language in the v3 round.
+
+**Decision: E1 — Enterprise Motion.** It compounds what the client already
+approved (v3) instead of resetting, and every added element traces to a
+source: sliders and stories from the live site, counters/cards from Infosys,
+theme from the EAims-2 brand files.

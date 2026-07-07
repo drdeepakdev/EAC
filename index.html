@@ -44,7 +44,7 @@
     "https://www.instagram.com/expertaims"
   ],
   "address": [
-    { "@type": "PostalAddress", "streetAddress": "P.O. Box 17008, Code No. 72451", "addressLocality": "Safat", "addressCountry": "KW" },
+    { "@type": "PostalAddress", "streetAddress": "Floor 19, Space Tower", "addressLocality": "Kuwait City", "addressCountry": "KW" },
     { "@type": "PostalAddress", "streetAddress": "Mosque Lane, Kesavadasapuram, Pattom P.O", "addressLocality": "Thiruvananthapuram", "addressRegion": "Kerala", "addressCountry": "IN" },
     { "@type": "PostalAddress", "streetAddress": "Block A, 3A-02, Jalan Stadium SS 7/15, Kelana Jaya", "addressLocality": "Selangor", "postalCode": "47301", "addressCountry": "MY" }
   ],
@@ -143,6 +143,53 @@ nav.links a.on{color:var(--ink);border-bottom-color:var(--red);font-weight:500}
 .sysmap.go .draw{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){.sysmap .draw{stroke-dashoffset:0;transition:none}}
 @media (max-width:900px){.hero-in{grid-template-columns:1fr}.hero-copy{padding-right:0}.hero-side{border-left:0;border-top:1px solid var(--line)}}
+
+
+/* ───────── hero slider ───────── */
+.hero{position:relative}
+.hero-vp{overflow:hidden}
+.hero-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.hslide{min-width:100%}
+@media (prefers-reduced-motion:reduce){.hero-track{transition:none}}
+.hero-ctrl{position:absolute;bottom:0;left:0;right:0;pointer-events:none}
+.hero-ctrl .wrap{display:flex;align-items:center;gap:16px;padding-top:0;padding-bottom:18px}
+.hdots{display:flex;gap:8px;pointer-events:auto}
+.hdot{width:24px;height:3px;background:var(--line-2);border:0;padding:0;cursor:pointer;transition:background .2s,width .2s}
+.hdot.on{width:40px;background:var(--red)}
+.harr{pointer-events:auto;width:36px;height:36px;border:1px solid var(--line-2);background:#fff;color:var(--ink);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s}
+.harr:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hs-art{width:100%;max-width:420px;height:auto}
+.hs-art .ln{stroke:var(--ink-2);stroke-width:1.1;fill:none;opacity:.55}
+.hs-art .ln.r{stroke:var(--red);opacity:.9}
+.hs-art .bx{fill:#fff;stroke:var(--ink-2);stroke-width:1;opacity:.9}
+.hs-art .fl{fill:var(--red)}
+.hs-art text{font-family:var(--mono);font-size:10px;letter-spacing:.05em;fill:var(--ink-2)}
+
+/* ───────── partners row ───────── */
+.partners{border-top:1px solid var(--line);padding:14px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.partners .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-right:14px;flex:none}
+.partners span{font-size:13px;font-weight:500;color:var(--mut);padding:3px 12px;border-left:1px solid var(--line)}
+.partners span:nth-of-type(1){border-left:0;padding-left:0}
+
+/* ───────── stats counters (dark band) ───────── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--d-line);border:1px solid var(--d-line);margin-bottom:clamp(30px,4vw,48px)}
+.st{background:var(--dark);padding:22px 22px;display:flex;flex-direction:column;gap:4px}
+.st b{font-size:clamp(26px,2.6vw,38px);font-weight:600;color:var(--d-text);line-height:1;font-variant-numeric:tabular-nums}
+.st b i{font-style:normal;color:var(--d-red)}
+.st > span{font-size:12px;color:var(--d-mut);line-height:1.5}
+@media (max-width:800px){.stats-row{grid-template-columns:1fr 1fr}}
+
+/* ───────── testimonials ───────── */
+#voices{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tst-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.tst{background:#fff;padding:28px 26px;display:flex;flex-direction:column;gap:16px;position:relative}
+.tst::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red)}
+.tst blockquote{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink-2);margin:0}
+.tst figcaption b{font-size:14px;font-weight:600;color:var(--ink);display:block}
+.tst figcaption span{font-family:var(--mono);font-size:11.5px;color:var(--mut)}
+@media (max-width:800px){.tst-grid{grid-template-columns:1fr}}
+
+@media (max-width:900px){.hero-ctrl{position:static}.hero-ctrl .wrap{padding-top:14px}}
 
 /* ───────── trust strip ───────── */
 .trust{border-bottom:1px solid var(--line);background:#fff}
@@ -304,10 +351,14 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
 <main id="top">
 
 <!-- ═════════ HERO ═════════ -->
-<div class="hero">
+<div class="hero" id="heroSlider" aria-roledescription="carousel" aria-label="ExpertAims highlights">
+  <div class="hero-vp">
+  <div class="hero-track" id="heroTrack">
+
+  <div class="hslide" role="group" aria-label="1 of 4">
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <p class="eyeb rv">ExpertAims Consultancy · Kuwait &amp; India · since 2012</p>
+      <p class="eyeb rv">Shaping the future. Together · Kuwait &amp; India · since 2012</p>
       <h1 class="rv">Technology consulting, cloud, cybersecurity &amp; digital solutions for <span class="red">growing businesses</span><span class="dot-t" aria-hidden="true"></span></h1>
       <p class="lede rv">We plan, build and support the technology that companies run on — from business email and infrastructure to websites, apps and the marketing that brings customers in. One accountable partner, before and after launch.</p>
       <div class="hero-ctas rv">
@@ -338,6 +389,90 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
       </svg>
     </div>
   </div>
+  </div>
+
+  <div class="hslide" role="group" aria-label="2 of 4">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyeb">Cloud · Microsoft 365 · Google Workspace</p>
+      <h2 class="h2" style="margin:20px 0 18px">Business email that just works — and files that follow the team<span class="dot-t" aria-hidden="true"></span></h2>
+      <p class="lede">Migrations to Microsoft 365 or Google Workspace handled on weekends, licence counts that match reality, and one bill that makes sense. Monday looks normal; everything else got better.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-red" href="#contact">Plan your migration</a>
+        <a class="btn btn-ghost" href="#services">View Services</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <svg class="hs-art" viewBox="0 0 420 300" role="img" aria-label="Cloud email and files diagram">
+        <path class="ln" d="M120 170a34 34 0 0 1 6-67 42 42 0 0 1 81 10 28 28 0 0 1-6 57H120z"/>
+        <path class="ln r" d="M210 150 H280"/><circle class="fl" cx="280" cy="150" r="5"/>
+        <rect class="bx" x="290" y="108" width="94" height="30"/><text x="337" y="127" text-anchor="middle">you@company</text>
+        <rect class="bx" x="290" y="146" width="94" height="30"/><text x="337" y="165" text-anchor="middle">shared files</text>
+        <rect class="bx" x="290" y="184" width="94" height="30"/><text x="337" y="203" text-anchor="middle">calendars</text>
+        <text x="96" y="220">migrated · weekend · zero drama</text>
+      </svg>
+    </div>
+  </div>
+  </div>
+
+  <div class="hslide" role="group" aria-label="3 of 4">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyeb">Websites · E-commerce · Apps</p>
+      <h2 class="h2" style="margin:20px 0 18px">Launch your store online — <span class="red">fast</span><span class="dot-t" aria-hidden="true"></span></h2>
+      <p class="lede">Complete e-commerce and web builds that take your site to a new level of profitability — storefront, payments and fulfilment working as one, built cleanly and maintained after launch.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-red" href="#contact">Start your build</a>
+        <a class="btn btn-ghost" href="#work">See case studies</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <svg class="hs-art" viewBox="0 0 420 300" role="img" aria-label="E-commerce storefront diagram">
+        <rect class="bx" x="60" y="50" width="200" height="140"/><path class="ln" d="M60 78 H260"/>
+        <circle class="fl" cx="76" cy="64" r="4"/><circle class="ln" cx="90" cy="64" r="4"/>
+        <path class="ln" d="M78 104 H190M78 124 H160"/><rect class="fl" x="78" y="146" width="70" height="22"/>
+        <text x="113" y="161" text-anchor="middle" style="fill:#fff">Buy now</text>
+        <path class="ln r" d="M260 120 H320"/><circle class="fl" cx="320" cy="120" r="5"/>
+        <path class="ln" d="M330 106 h44l-6 34h-32zM340 106v-8a8 8 0 0 1 16 0v8"/>
+        <text x="300" y="220">order received · paid · shipped</text>
+      </svg>
+    </div>
+  </div>
+  </div>
+
+  <div class="hslide" role="group" aria-label="4 of 4">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyeb">Managed IT · Remote support</p>
+      <h2 class="h2" style="margin:20px 0 18px">Support that answers — remotely, <span class="red">immediately</span><span class="dot-t" aria-hidden="true"></span></h2>
+      <p class="lede">Remote maintenance over the Internet means requests are processed live, the moment they arrive — enormous time and cost savings, from a team that already knows your setup.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-red" href="#contact">Get support cover</a>
+        <a class="btn btn-ghost" href="https://wa.me/96590908625" target="_blank" rel="noopener">WhatsApp us now</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <svg class="hs-art" viewBox="0 0 420 300" role="img" aria-label="Remote support diagram">
+        <path class="ln" d="M90 160a60 60 0 0 1 120 0"/>
+        <rect class="bx" x="82" y="160" width="26" height="40"/><rect class="bx" x="192" y="160" width="26" height="40"/>
+        <path class="ln" d="M205 200v10h-40"/>
+        <path class="ln r" d="M230 150 h50l10-14 12 28 10-20 8 6h30"/>
+        <circle class="fl" cx="350" cy="150" r="5"/>
+        <text x="256" y="220">request → resolved · live</text>
+      </svg>
+    </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+  <div class="hero-ctrl">
+    <div class="wrap">
+      <button class="harr" id="hPrev" aria-label="Previous slide">←</button>
+      <div class="hdots" id="hDots" role="tablist" aria-label="Slides"></div>
+      <button class="harr" id="hNext" aria-label="Next slide">→</button>
+    </div>
+  </div>
 </div>
 
 <!-- ═════════ TRUST STRIP ═════════ -->
@@ -345,13 +480,17 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
   <div class="wrap">
     <div class="trust-facts rv" role="list" aria-label="Company credentials">
       <div class="tf" role="listitem"><b>Kuwait + India presence</b><span>local support on the ground, delivery scale behind it</span></div>
-      <div class="tf" role="listitem"><b>ISO 9001 certified</b><span>audited quality management on every engagement</span></div>
+      <div class="tf" role="listitem"><b>ISO 9001:2015 certified</b><span>audited quality management on every engagement</span></div>
       <div class="tf" role="listitem"><b>20+ years of expertise</b><span>senior team; the company has served clients since 2012</span></div>
       <div class="tf" role="listitem"><b>Long-term clients</b><span>repeat work is our main growth channel</span></div>
     </div>
     <div class="clients rv" aria-label="Selected clients">
       <span class="lab">Selected clients</span>
-      <span>Onetech Computers</span><span>Kidz Nursery</span><span>3QARQ8</span><span>Gulf Dynamics</span><span>Meridian Health</span><span>Selangor Systems</span>
+      <span>Onetech Computers</span><span>Kidz Nursery</span><span>3QARQ8</span><span>Al Mohsen Group</span><span>Artech Q8</span><span>Gulf Dynamics</span>
+    </div>
+    <div class="partners rv" aria-label="Technology partners">
+      <span class="lab">Technology partners</span>
+      <span>Microsoft</span><span>Google</span><span>HP</span><span>Dell</span><span>Cisco</span><span>Oracle</span>
     </div>
   </div>
 </div>
@@ -476,9 +615,35 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
   </div>
 </section>
 
+<!-- ═════════ TESTIMONIALS ═════════ -->
+<section id="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyeb rv">Client voices</p>
+      <h2 class="h2 rv">In their words<span class="dot-t" aria-hidden="true"></span></h2>
+    </div>
+    <div class="tst-grid rv">
+      <figure class="tst">
+        <blockquote>"We really appreciate ExpertAims being on top of everything we have thrown their way. The design is very creative and the marketing implementation effective. Thanks for the great effort and quality service — we will continue working together into the future."</blockquote>
+        <figcaption><b>A. Al Mohsen</b><span>CEO · Al Mohsen Group</span></figcaption>
+      </figure>
+      <figure class="tst">
+        <blockquote>"The service received from ExpertAims Consultancy was very professional and prompt. The quality of the web design was outstanding, and their recommendations were valuable to our business."</blockquote>
+        <figcaption><b>M. Murali</b><span>CEO · Artech Q8</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ═════════ WHY ═════════ -->
 <section id="why">
   <div class="wrap">
+    <div class="stats-row rv" role="list" aria-label="Key numbers">
+      <div class="st" role="listitem"><b><span class="cnt" data-n="2012" data-plain="1">2012</span></b><span>serving businesses since</span></div>
+      <div class="st" role="listitem"><b><span class="cnt" data-n="20">20</span><i>+</i></b><span>years of senior team expertise</span></div>
+      <div class="st" role="listitem"><b><span class="cnt" data-n="6">6</span></b><span>core services, one accountable team</span></div>
+      <div class="st" role="listitem"><b><span class="cnt" data-n="3">3</span></b><span>offices — Kuwait, India, Malaysia</span></div>
+    </div>
     <div class="sec-head">
       <p class="eyeb rv">Why ExpertAims</p>
       <h2 class="h2 rv">Practical reasons, not promises<span class="dot-t" aria-hidden="true" style="background:var(--d-red)"></span></h2>
@@ -521,7 +686,7 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
           </a>
         </div>
         <div class="offices3">
-          <div class="of"><b>Kuwait</b><p>P.O. Box 17008, Safat 72451, State of Kuwait</p></div>
+          <div class="of"><b>Kuwait</b><p>Floor 19, Space Tower, Kuwait City — in association with Mart Solution Consulting Co. W.L.L.</p></div>
           <div class="of"><b>India — HQ</b><p>Kesavadasapuram, Pattom P.O, Thiruvananthapuram, Kerala</p></div>
           <div class="of"><b>Malaysia</b><p>Block A, 3A-02, Jalan Stadium SS 7/15, Kelana Jaya, Selangor</p></div>
         </div>
@@ -546,7 +711,7 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
     <div class="fgrid">
       <div>
         <img src="assets/brand/logo-full-dark.svg" alt="ExpertAims — Consulting · Technology · Outsourcing" width="718" height="137">
-        <p class="fp">Technology consulting, cloud, cybersecurity and digital solutions for growing businesses — Kuwait &amp; India, since 2012. ISO 9001 certified.</p>
+        <p class="fp">Technology consulting, cloud, cybersecurity and digital solutions for growing businesses — Kuwait &amp; India, since 2012. ISO 9001:2015 certified.</p>
       </div>
       <div class="fcol">
         <h4>Services</h4>
@@ -574,7 +739,7 @@ footer{background:var(--dark);color:var(--d-text);padding:clamp(40px,5vw,60px) 0
     </div>
     <div class="fbar">
       <span>© <span id="yr">2026</span> ExpertAims Consultancy. All rights reserved.</span>
-      <span class="mono">We show up. We follow through.</span>
+      <span class="mono">Shaping the future. Together · We show up. We follow through.</span>
     </div>
   </div>
 </footer>
@@ -607,6 +772,57 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   if(!('IntersectionObserver' in window)){m.classList.add('go');return;}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){m.classList.add('go');io.disconnect();}});},{threshold:.3});
   io.observe(m);
+})();
+// hero slider — autoplay, arrows, dots; pauses on hover; honors reduced motion
+(function(){
+  var track=document.getElementById('heroTrack');if(!track)return;
+  var slides=track.children.length,i=0,timer=null;
+  var dotsWrap=document.getElementById('hDots');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for(var d=0;d<slides;d++){
+    var b=document.createElement('button');
+    b.className='hdot'+(d===0?' on':'');b.setAttribute('role','tab');
+    b.setAttribute('aria-label','Slide '+(d+1));b.dataset.i=d;
+    dotsWrap.appendChild(b);
+  }
+  var dots=dotsWrap.children;
+  function go(n){
+    i=(n+slides)%slides;
+    track.style.transform='translateX(-'+(i*100)+'%)';
+    for(var d=0;d<slides;d++)dots[d].classList.toggle('on',d===i);
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  function play(){if(reduce)return;stop();timer=setInterval(function(){go(i+1);},6500);}
+  document.getElementById('hPrev').addEventListener('click',function(){go(i-1);play();});
+  document.getElementById('hNext').addEventListener('click',function(){go(i+1);play();});
+  dotsWrap.addEventListener('click',function(e){var b=e.target.closest('.hdot');if(b){go(+b.dataset.i);play();}});
+  var hero=document.getElementById('heroSlider');
+  hero.addEventListener('mouseenter',stop);
+  hero.addEventListener('mouseleave',play);
+  hero.addEventListener('focusin',stop);
+  play();
+})();
+// stat counters
+(function(){
+  var els=document.querySelectorAll('.cnt');
+  if(!els.length)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce||!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting||e.target.dataset.done)return;
+      e.target.dataset.done='1';
+      var end=+e.target.dataset.n,t0=null,el=e.target;
+      function step(ts){
+        if(!t0)t0=ts;
+        var pr=Math.min((ts-t0)/1100,1),eased=1-Math.pow(1-pr,3);
+        el.textContent=Math.round(end*eased);
+        if(pr<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  },{threshold:.5});
+  els.forEach(function(e){io.observe(e);});
 })();
 // scrollspy
 (function(){
