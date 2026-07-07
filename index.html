@@ -1151,6 +1151,43 @@ html[data-theme="light"] .ticker { background:#100c0b; }
 .about-badge { margin-top:20px; display:inline-flex; align-items:center; gap:9px; font-size:12px; font-weight:600; color:#1a1414; background:var(--off-white); border:1px solid #e0dace; border-radius:22px; padding:8px 15px; }
 .about-badge span { width:8px; height:8px; border-radius:50%; background:#1f9d55; }
 
+/* CAPABILITY ATLAS */
+#atlas { background:var(--black); padding:110px 40px; position:relative; overflow:hidden; }
+#atlas::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 55% 60% at 72% 50%, rgba(176,16,16,0.10) 0%, transparent 65%); pointer-events:none; }
+.atlas-inner { max-width:1240px; margin:0 auto; display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center; position:relative; }
+#atlas .section-eyebrow { color:var(--accent); }
+.atlas-copy h2 { font-size:clamp(34px,3.8vw,54px); font-weight:800; line-height:1.05; letter-spacing:-0.025em; color:#fff; margin-top:14px; }
+.atlas-copy h2 em { color:var(--accent); font-style:normal; }
+.atlas-lede { font-size:15px; line-height:1.75; color:rgba(255,255,255,0.6); margin-top:20px; max-width:46ch; }
+.atlas-detail { margin-top:34px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-left:3px solid var(--accent); border-radius:0 12px 12px 0; padding:22px 24px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); min-height:170px; transition:border-color .25s; }
+.atlas-detail-cat { font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); }
+.atlas-detail h3 { font-size:20px; font-weight:800; color:#fff; margin:9px 0 10px; line-height:1.2; }
+.atlas-detail p { font-size:13.5px; line-height:1.7; color:rgba(255,255,255,0.62); margin-bottom:14px; }
+.atlas-detail-cta { font-size:13px; font-weight:700; color:var(--accent); text-decoration:none; display:inline-flex; gap:7px; align-items:center; transition:gap .2s; }
+.atlas-detail-cta:hover { gap:12px; }
+.atlas-stage { position:relative; }
+#atlasSvg { width:100%; height:auto; display:block; overflow:visible; }
+#atlasSvg .atlas-line { stroke:rgba(255,255,255,0.14); stroke-width:1; }
+#atlasSvg .atlas-line.hot { stroke:rgba(176,16,16,0.75); stroke-width:1.5; }
+#atlasSvg .atlas-ring { fill:none; stroke:rgba(255,255,255,0.05); stroke-dasharray:2 5; }
+#atlasSvg .hub-node circle { fill:#1a0d0c; stroke:var(--accent); stroke-width:1.5; }
+#atlasSvg .hub-node text { fill:#fff; font-weight:800; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; }
+#atlasSvg .svc-node { cursor:pointer; }
+#atlasSvg .svc-node circle { fill:#141010; stroke:rgba(255,255,255,0.25); stroke-width:1; transition:stroke .2s, fill .2s; }
+#atlasSvg .svc-node text { fill:rgba(255,255,255,0.62); font-size:10.5px; font-weight:600; transition:fill .2s; }
+#atlasSvg .svc-node:hover circle, #atlasSvg .svc-node.on circle { fill:#2a0a0a; stroke:var(--accent); }
+#atlasSvg .svc-node:hover text, #atlasSvg .svc-node.on text { fill:#fff; }
+#atlasSvg .svc-node.on circle { stroke-width:2; }
+#atlasSvg .core-pulse { fill:none; stroke:rgba(176,16,16,0.4); animation:atlasPulse 3s ease-out infinite; transform-origin:center; }
+@keyframes atlasPulse { 0% { opacity:.8; } 100% { opacity:0; } }
+@media (prefers-reduced-motion: reduce) { #atlasSvg .core-pulse { animation:none; opacity:0; } }
+html[data-theme="light"] #atlas { background:#16100e; }
+@media (max-width:960px){
+  .atlas-inner { grid-template-columns:1fr; gap:20px; }
+  #atlas { padding:70px 20px; }
+  .atlas-stage { max-width:560px; margin:0 auto; width:100%; }
+}
+
 /* HOW WE WORK */
 #process { background:#0d0d0d; padding:100px 40px; position:relative; }
 .process-inner { max-width:1200px; margin:0 auto; }
@@ -1458,11 +1495,13 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
       <!-- Technology -->
       <div class="showcase-panel active" id="sp-strategy">
         <p class="svc-intro">Business requirements are changing fast. Enterprises need agile, innovative solutions to navigate today's challenges and prepare for tomorrow's. We help customers drive business growth and minimise operational costs — working closely with each client to understand and address their unique business challenges, transforming customers into advocates and leveraging data for critical business insights.</p>
-        <div class="svc-grid">
+        <div class="svc-grid cols3">
           <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l6 6"/><path d="M8 13v-2.5M10.5 13V8.5M13 13v-4"/><rect x="18.5" y="3" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">01 / TECH</div><h3>Digital Marketing &amp; SEO</h3><p>Advanced digital marketing technologies — AI-driven marketing analytics, chatbots, and personalised customer experiences that earn their keep.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
           <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="4" width="18" height="12"/><path d="M12 16v3.5M7.5 20.5h9"/><path d="M7 8h10M7 11h6"/><rect x="16.2" y="9.6" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">02 / TECH</div><h3>E-learning Platforms</h3><p>Online learning platforms, virtual classrooms, and certification programmes — comprehensive learning solutions for professionals fortifying their technical expertise and marketability.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
           <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="7" width="12" height="10"/><path d="M9 7V4M12 7V4M15 7V4M9 20v-3M12 20v-3M15 20v-3M6 10H3.5M6 14H3.5M20.5 10H18M20.5 14H18"/><rect x="13.8" y="12.8" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">03 / TECH</div><h3>Cloud, AI &amp; ML</h3><p>A specialised team of cloud experts crafting tailored solutions — helping you select the optimal cloud for your business and implement it seamlessly, with practical AI and ML on top.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
           <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="4" width="12" height="10"/><path d="M3 7h12"/><rect x="13" y="10" width="8" height="11"/><path d="M15.5 18.5h3"/><rect x="4.6" y="5" width="2" height="1.4" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">04 / TECH</div><h3>Web &amp; Mobile Development</h3><p>Custom web and mobile apps on modern frameworks — handled end to end, from the first sketch to the day it goes live.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
+          <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 8h16l-1.5 11h-13z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/><rect x="10.6" y="12" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">05 / TECH</div><h3>E-Commerce Solutions</h3><p>Complete e-commerce builds — storefront, payments, and fulfilment integrations that take your site to an entirely new level of profitability.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
+          <div class="svc-card"><div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 13a8 8 0 0116 0"/><rect x="3" y="13" width="4" height="6"/><rect x="17" y="13" width="4" height="6"/><path d="M21 19v1.5h-6"/><rect x="12.2" y="19.6" width="2.8" height="2.8" fill="currentColor" stroke="none"/></svg></div><div class="svc-num">06 / TECH</div><h3>Online Support &amp; Maintenance</h3><p>Remote maintenance and optimisation over the Internet — enormous time and cost savings, with teams that already know your environment.</p><a class="svc-link" href="#contact">Discuss a project →</a></div>
         </div>
       </div>
       <!-- Consulting -->
@@ -1491,6 +1530,26 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
   </div>
 </section>
 
+
+<!-- ─────────────────────────── CAPABILITY ATLAS ─────────────────────────── -->
+<section id="atlas">
+  <div class="atlas-inner">
+    <div class="atlas-copy">
+      <div class="section-eyebrow">Capability Atlas</div>
+      <h2>Sixteen disciplines.<br><em>One map.</em></h2>
+      <p class="atlas-lede">Strategy, planning and build — every service we run, drawn as one system around a single accountable core. Select any node to explore it.</p>
+      <div class="atlas-detail" id="atlasDetail" aria-live="polite">
+        <span class="atlas-detail-cat" id="atlasDetailCat">ExpertAims Consultancy</span>
+        <h3 id="atlasDetailTitle">Shaping the future. Together.</h3>
+        <p id="atlasDetailBody">Technology, consulting and outsourcing under one roof since 2012 — ISO 9001:2008 certified, across India, Malaysia and Kuwait. Tap a discipline on the map to see how it works.</p>
+        <a class="atlas-detail-cta" id="atlasDetailCta" href="#contact">Start a conversation →</a>
+      </div>
+    </div>
+    <div class="atlas-stage">
+      <svg id="atlasSvg" viewBox="0 0 640 640" role="group" aria-label="Interactive map of ExpertAims services"></svg>
+    </div>
+  </div>
+</section>
 
 <!-- ─────────────────────────── HOW WE WORK ─────────────────────────── -->
 <section id="process">
@@ -2200,6 +2259,108 @@ document.querySelectorAll(".cf-field input,.cf-field textarea,.cf-field select")
   }
   document.getElementById("cookieAccept").addEventListener("click", function(){ settle("all"); });
   document.getElementById("cookieDecline").addEventListener("click", function(){ settle("essential"); });
+})();
+// Capability Atlas — generative radial service map
+(function(){
+  var svg = document.getElementById("atlasSvg"); if(!svg) return;
+  var NS = "http://www.w3.org/2000/svg";
+  var CX = 320, CY = 320;
+
+  var DATA = [
+    { cat: "Technology Services", angle: -90, cta: "Discuss a project →", items: [
+      { t: "Digital Marketing & SEO", d: "AI-driven marketing analytics, chatbots and personalised customer experiences that earn their keep." },
+      { t: "E-learning & Certification", d: "Online learning platforms, virtual classrooms and certification programmes for professionals fortifying their expertise." },
+      { t: "Cloud, AI & ML", d: "Cloud experts crafting tailored on-demand solutions — chosen for your business and implemented seamlessly." },
+      { t: "Web & Mobile", d: "Custom, responsive web and mobile applications handled end to end, from first sketch to launch day." },
+      { t: "E-Commerce", d: "Complete e-commerce solutions that take your website to an entirely new level of profitability." },
+      { t: "Online Support", d: "Remote maintenance and optimisation over the Internet — enormous time and cost savings." }
+    ]},
+    { cat: "Consulting Services", angle: 150, cta: "Start a conversation →", items: [
+      { t: "Digital Transformation", d: "Technology adoption, process optimisation and organisational change management, done in the right order." },
+      { t: "Cybersecurity", d: "Innovative security solutions and advisory that hold up as threats multiply — from audits to incident response." },
+      { t: "Data Analytics & BI", d: "Advanced analytics and business intelligence that turn your data into better decisions." },
+      { t: "Fintech", d: "Mobile banking apps, digital wallets and blockchain-based financial services, built to be trusted." },
+      { t: "IoT Integration", d: "Connecting and managing IoT devices for manufacturing, healthcare and smart cities." },
+      { t: "AR / VR", d: "Immersive experiences for gaming, education, healthcare and enterprise." }
+    ]},
+    { cat: "Professional Outsourcing", angle: 30, cta: "Build your team →", items: [
+      { t: "Application Outsourcing", d: "Top-notch software crafted with the latest technologies — our teams plug into your workflow, not the reverse." },
+      { t: "Product Development", d: "Extend your development capacity to conclude projects successfully, with full product ownership." },
+      { t: "Managed Outsourcing", d: "Specialised management of complex outsourcing contracts — agreements, SLAs and vendor relationships." },
+      { t: "Support & Helpdesk", d: "Round-the-clock tiered support across our international offices, from teams that know your environment." }
+    ]}
+  ];
+
+  function el(name, attrs, parent){
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function polar(angleDeg, r){
+    var a = angleDeg * Math.PI / 180;
+    return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+  }
+
+  // guide rings
+  [110, 205, 275].forEach(function(r){ el("circle", { cx: CX, cy: CY, r: r, "class": "atlas-ring" }, svg); });
+
+  var linesLayer = el("g", {}, svg);
+  var nodesLayer = el("g", {}, svg);
+  var detail = {
+    cat: document.getElementById("atlasDetailCat"),
+    title: document.getElementById("atlasDetailTitle"),
+    body: document.getElementById("atlasDetailBody"),
+    cta: document.getElementById("atlasDetailCta")
+  };
+  var allNodes = [], allLines = [];
+
+  function select(node, line, cat, item, cta){
+    allNodes.forEach(function(n){ n.classList.remove("on"); });
+    allLines.forEach(function(l){ l.classList.remove("hot"); });
+    node.classList.add("on"); line.classList.add("hot");
+    detail.cat.textContent = cat;
+    detail.title.textContent = item.t;
+    detail.body.textContent = item.d;
+    detail.cta.textContent = cta;
+  }
+
+  DATA.forEach(function(branch){
+    var hubPos = polar(branch.angle, 110);
+    el("line", { x1: CX, y1: CY, x2: hubPos[0], y2: hubPos[1], "class": "atlas-line" }, linesLayer);
+
+    var n = branch.items.length;
+    var spread = n > 4 ? 108 : 72; // degrees of fan per branch
+    branch.items.forEach(function(item, i){
+      var a = branch.angle - spread/2 + (n === 1 ? spread/2 : spread * i / (n - 1));
+      var r = 205 + (i % 2) * 52; // alternate two ring depths to avoid label collisions
+      var p = polar(a, r);
+      var line = el("line", { x1: hubPos[0], y1: hubPos[1], x2: p[0], y2: p[1], "class": "atlas-line" }, linesLayer);
+      var g = el("g", { "class": "svc-node", tabindex: "0", role: "button", "aria-label": branch.cat + ": " + item.t }, nodesLayer);
+      el("circle", { cx: p[0], cy: p[1], r: 7 }, g);
+      var anchor = Math.cos(a * Math.PI/180) > 0.35 ? "start" : (Math.cos(a * Math.PI/180) < -0.35 ? "end" : "middle");
+      var dy = Math.sin(a * Math.PI/180) > 0.5 ? 22 : (Math.sin(a * Math.PI/180) < -0.5 ? -14 : 4);
+      var dx = anchor === "start" ? 13 : (anchor === "end" ? -13 : 0);
+      el("text", { x: p[0] + dx, y: p[1] + dy, "text-anchor": anchor }, g).textContent = item.t;
+      function act(){ select(g, line, branch.cat, item, branch.cta); }
+      g.addEventListener("click", act);
+      g.addEventListener("keydown", function(ev){ if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); act(); } });
+      allNodes.push(g); allLines.push(line);
+    });
+
+    // hub drawn after its lines
+    var hub = el("g", { "class": "hub-node" }, nodesLayer);
+    el("circle", { cx: hubPos[0], cy: hubPos[1], r: 15 }, hub);
+    var ha = Math.cos(branch.angle * Math.PI/180);
+    var hAnchor = ha > 0.35 ? "start" : (ha < -0.35 ? "end" : "middle");
+    var hdy = Math.sin(branch.angle * Math.PI/180) > 0.5 ? 36 : -26;
+    el("text", { x: hubPos[0] + (hAnchor === "start" ? 22 : hAnchor === "end" ? -22 : 0), y: hubPos[1] + (hAnchor === "middle" ? hdy : 5), "text-anchor": hAnchor }, hub).textContent = branch.cat.replace(" Services","").replace("Professional ","");
+  });
+
+  // core: pulse + E logomark
+  el("circle", { cx: CX, cy: CY, r: 34, "class": "core-pulse" }, svg);
+  el("circle", { cx: CX, cy: CY, r: 30, fill: "#1a0d0c", stroke: "#B01010", "stroke-width": "1.5" }, svg);
+  el("image", { href: "assets/brand/logo-e.png", x: CX - 12, y: CY - 17, width: 24, height: 34 }, svg);
 })();
 </script>
 </body>
