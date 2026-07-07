@@ -15,8 +15,13 @@ built without stock photography. Every visual (hero, case studies, portfolio,
 careers) is original CSS/SVG art in the brand's own black-and-red language,
 not a generic Unsplash/AI-slop treatment:
 
-- **Black-and-signature-red** palette (`#0a0807` / `#B01010`), matching the
-  real ExpertAims logomark's black-to-red duotone "E" swoosh.
+- **Official brand palette** taken from the EAims-2 vector sources: signature
+  red `#9E0000`, near-black `#0a0807`, grays `#0F0F0F` / `#646464` — matching
+  the logomark's gradient "E" swoosh and its red aim-dot.
+- **Vector logos** (`logo-e.svg`, `logo-full.svg`) reconstructed from the
+  original Illustrator/PDF files with true SVG gradients — crisp at any size.
+- **The aim-dot motif**: the red dot from the logomark recurs as brand
+  punctuation (hero headlines, footer tagline, OG card).
 - **Outfit** (display) + **Inter** (body) typography.
 - Full-bleed hero with an auto-playing headline slider, animated gradient
   blobs, grain texture, and a parallax 3D-extruded logo — pure abstract art,
