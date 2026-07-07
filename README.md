@@ -39,9 +39,12 @@ not a generic Unsplash/AI-slop treatment:
 | Path | Purpose |
 |------|---------|
 | `index.html` | The entire site — markup, styles, and scripts in one file |
+| `404.html` | Branded not-found page (auto-served by GitHub Pages) |
+| `robots.txt`, `sitemap.xml` | Crawler directives and sitemap for expertaims.com |
 | `assets/brand/logo-e.png` | The "E" logomark (nav icon, favicon, 3D hero effect) |
-| `assets/brand/logo-full.png` | Full wordmark + tagline lockup (nav hover state, OG image) |
-| `assets/brand/logo-e-dark.png`, `logo-full-dark.png` | Light-on-dark logo variants, kept for any future dark-background placement (not currently wired into the page — the nav bar is white in both themes) |
+| `assets/brand/logo-full.png` | Full wordmark + tagline lockup (nav hover state) |
+| `assets/brand/logo-e-dark.png`, `logo-full-dark.png` | Light-on-dark logo variants (404 page; kept for future dark-background placements) |
+| `assets/brand/og-image.png` | 1200×630 social-share card (Open Graph / Twitter) |
 
 No build step. Open `index.html` directly, or serve the folder:
 

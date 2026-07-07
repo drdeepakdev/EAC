@@ -15,12 +15,14 @@
 <meta property="og:title" content="ExpertAims Consultancy | We Show Up. We Follow Through.">
 <meta property="og:description" content="An international IT consultancy — 15,000+ projects delivered for clients worldwide. No buzzword soup, just projects that ship.">
 <meta property="og:url" content="https://www.expertaims.com/">
-<meta property="og:image" content="https://www.expertaims.com/logo-full.png">
+<meta property="og:image" content="https://www.expertaims.com/assets/brand/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ExpertAims Consultancy | We Show Up. We Follow Through.">
 <meta name="twitter:description" content="An international IT consultancy — 15,000+ projects delivered for clients worldwide.">
-<meta name="twitter:image" content="https://www.expertaims.com/logo-full.png">
+<meta name="twitter:image" content="https://www.expertaims.com/assets/brand/og-image.png">
 <link rel="icon" type="image/png" href="assets/brand/logo-e.png">
 <link rel="apple-touch-icon" href="assets/brand/logo-e.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1151,6 +1153,10 @@ html[data-theme="light"] .ticker { background:#100c0b; }
 .about-badge { margin-top:20px; display:inline-flex; align-items:center; gap:9px; font-size:12px; font-weight:600; color:#1a1414; background:var(--off-white); border:1px solid #e0dace; border-radius:22px; padding:8px 15px; }
 .about-badge span { width:8px; height:8px; border-radius:50%; background:#1f9d55; }
 
+/* SKIP LINK */
+.skip-link { position:fixed; top:-48px; left:14px; z-index:400; background:var(--accent); color:#fff; font-weight:700; font-size:13.5px; padding:10px 18px; border-radius:0 0 8px 8px; text-decoration:none; transition:top .2s; }
+.skip-link:focus { top:0; }
+
 /* SCROLL PROGRESS */
 #scrollBar { position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg, var(--accent), #ff5a5a); z-index:200; transition:width .1s linear; }
 
@@ -1267,6 +1273,28 @@ html[data-theme="light"] .process-step p { color:rgba(0,0,0,0.55); }
 @media (max-width:900px){ .process-grid { grid-template-columns:1fr 1fr; } }
 @media (max-width:600px){ #process { padding:60px 20px; } .process-grid { grid-template-columns:1fr; } }
 
+/* FAQ */
+#faq { background:var(--dark2); padding:100px 40px; border-top:1px solid rgba(255,255,255,0.06); }
+.faq-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:start; }
+#faq .section-eyebrow { color:var(--accent); }
+.faq-head h2 { font-size:clamp(30px,3.4vw,46px); font-weight:800; line-height:1.08; letter-spacing:-0.02em; color:#fff; margin-top:14px; text-wrap:balance; }
+.faq-head h2 em { color:var(--accent); font-style:normal; }
+.faq-item { border-bottom:1px solid rgba(255,255,255,0.1); }
+.faq-item summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:18px; padding:20px 2px; font-size:16px; font-weight:700; color:#fff; transition:color .2s; }
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-item summary:hover { color:#ff5a5a; }
+.faq-x { position:relative; width:16px; height:16px; flex-shrink:0; }
+.faq-x::before, .faq-x::after { content:''; position:absolute; background:var(--accent); transition:transform .25s; }
+.faq-x::before { left:0; right:0; top:7px; height:2px; }
+.faq-x::after { top:0; bottom:0; left:7px; width:2px; }
+.faq-item[open] .faq-x::after { transform:scaleY(0); }
+.faq-item p { font-size:14px; line-height:1.75; color:rgba(255,255,255,0.6); padding:0 34px 22px 2px; max-width:64ch; }
+html[data-theme="light"] #faq { background:#f5f3ef; border-top-color:rgba(0,0,0,0.08); }
+html[data-theme="light"] .faq-head h2, html[data-theme="light"] .faq-item summary { color:#111; }
+html[data-theme="light"] .faq-item { border-bottom-color:rgba(0,0,0,0.12); }
+html[data-theme="light"] .faq-item p { color:rgba(0,0,0,0.6); }
+@media (max-width:900px){ .faq-inner { grid-template-columns:1fr; gap:26px; } #faq { padding:64px 20px; } }
+
 /* CLIENTS & WORK */
 #clients { background:var(--black); padding:100px 40px; overflow:hidden; }
 .clients-inner { max-width:1200px; margin:0 auto; }
@@ -1382,8 +1410,38 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
 .svc-ic svg { width:20px; height:20px; }
 .svc-card:hover .svc-ic { background:rgba(176,16,16,0.22); transform:translateY(-1px); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ExpertAims Consultancy",
+  "alternateName": "EAC",
+  "url": "https://www.expertaims.com/",
+  "logo": "https://www.expertaims.com/assets/brand/logo-full.png",
+  "slogan": "We show up. We follow through.",
+  "foundingDate": "2012",
+  "description": "ExpertAims Consultancy (EAC) is an ISO 9001:2008 certified IT company founded in 2012, delivering technology services, IT consulting, and professional outsourcing across India, Malaysia and Kuwait.",
+  "email": "info@expertaims.com",
+  "sameAs": [
+    "https://www.linkedin.com/company/expertaims",
+    "https://www.facebook.com/expertaims",
+    "https://www.instagram.com/expertaims"
+  ],
+  "address": [
+    { "@type": "PostalAddress", "streetAddress": "Mosque Lane, Kesavadasapuram, Pattom P.O", "addressLocality": "Thiruvananthapuram", "addressRegion": "Kerala", "addressCountry": "IN" },
+    { "@type": "PostalAddress", "streetAddress": "Block A, 3A-02, Jalan Stadium SS 7/15, Kelana Jaya", "addressLocality": "Selangor", "postalCode": "47301", "addressCountry": "MY" },
+    { "@type": "PostalAddress", "streetAddress": "P.O. Box 17008, Code No. 72451", "addressLocality": "Safat", "addressCountry": "KW" }
+  ],
+  "contactPoint": [
+    { "@type": "ContactPoint", "telephone": "+91-471-2910255", "contactType": "customer service", "areaServed": "IN" },
+    { "@type": "ContactPoint", "telephone": "+60-168-248-326", "contactType": "customer service", "areaServed": "MY" },
+    { "@type": "ContactPoint", "telephone": "+965-9090-8625", "contactType": "customer service", "areaServed": "KW" }
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#about">Skip to content</a>
 
 <!-- ─────────────────────────── NAV ─────────────────────────── -->
 <div id="scrollBar" aria-hidden="true"></div>
@@ -1924,6 +1982,42 @@ html[data-theme="light"] .careers-pillars .pillar-word { color: #1a1414; }
   </div>
 </section>
 
+
+<!-- ─────────────────────────── FAQ ─────────────────────────── -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-head">
+      <div class="section-eyebrow">Common questions</div>
+      <h2>Before you ask —<br><em>we probably have an answer.</em></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>How do we start a project with you?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>Pick whichever channel suits you — the enquiry form below, email, or a call to the nearest office. Tell us what you're trying to build (or fix) and we'll come back within one working day with the questions that matter and a suggested next step.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What information do you need for an accurate quote?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>A brief project overview — goals, who it's for, and what success looks like. If you have an existing site or reference sites you like, share them. An indicative budget and a target live date help us propose something realistic rather than generic; if you don't know them yet, that's fine too.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you take over or update an existing website or system?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>Yes — a large share of our work starts as a rescue or upgrade of something another vendor built. We audit what exists, tell you honestly what's worth keeping, and plan the update so the business keeps running while we work.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does your work integrate with our existing business systems?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>System integration is one of our founding competencies. Whether it's an ERP, a payment gateway, a legacy database, or a government portal, we design new builds to plug into what you already run — not the other way round.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work with clients outside India, Malaysia and Kuwait?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>Yes. The three offices are delivery hubs, not boundaries — we've served clients worldwide since 2012, with remote delivery and support handled across time zones by one ISO-certified standard.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the information we share with you confidential?<span class="faq-x" aria-hidden="true"></span></summary>
+        <p>Strictly. Everything you provide — project details, documents, budgets — is treated as confidential and is never disclosed without your prior consent. We're happy to sign an NDA before the first conversation.</p>
+      </details>
+    </div>
+  </div>
+</section>
 
 <!-- ─────────────────────────── STAY AHEAD ─────────────────────────── -->
 <!-- ─────────────────────────── CONTACT ─────────────────────────── -->
