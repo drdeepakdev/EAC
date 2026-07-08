@@ -124,3 +124,16 @@ bolt-on effect:
 - **Aim-dot searchlight** — a soft brand-red spotlight that follows the
   pointer across service cards and project art (hover-capable, fine
   pointers only).
+
+## v5.2 — the signal compass (client-directed, current)
+The client found the fixed left meridian rail intrusive — it crossed the
+footer logo and text. Removed it (and the footer terminus drop), restored
+a symmetric page grid, and re-expressed the concept as the **signal
+compass**: the aim-dot inside a scroll-progress ring docked bottom-left.
+It fills as you travel the page, announces each station by name in a
+transient mono pill ("STATION 03 · WHY EXPERTAIMS"), shows the label on
+hover, and returns you to the top of the line on click. Appears only
+after you start scrolling; hidden on small screens and in print. The
+inline station dots and the "End of line" terminus label remain — the
+line itself is now something you carry, not something drawn over the
+page.

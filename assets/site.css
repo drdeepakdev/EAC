@@ -59,7 +59,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1
 img{max-width:100%;display:block}
 a{color:inherit}
 ::selection{background:var(--acc);color:#fff}
-.wrap{max-width:var(--max);margin:0 auto;padding-left:calc(var(--gut) + var(--rail));padding-right:var(--gut)}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
 .wrap--flush{padding-left:var(--gut)}
 
 /* theme-dependent logo swap */
@@ -100,15 +100,23 @@ a{color:inherit}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-/* ══ meridian rail ══ */
-.mer{position:fixed;left:calc((100vw - var(--max))/2 + var(--gut) + 26px);top:0;bottom:0;width:2px;z-index:5;pointer-events:none}
-.mer::before{content:'';position:absolute;inset:0;background:var(--line)}
-.mer .mer-fill{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(var(--acc-ink),var(--acc));transform-origin:top;transform:scaleY(0)}
-@media (max-width:1380px){.mer{left:calc(var(--gut) + 26px)}}
-@media (max-width:920px){.mer{display:none}.wrap{padding-left:var(--gut)}}
+/* ══ signal compass ══
+   Replaces the old fixed meridian rail: the aim-dot inside a ring
+   that fills with scroll progress, docked bottom-left. It names the
+   station you just reached and returns you to the top of the line. */
 .stn-anchor{position:relative}
-.stn-anchor::before{content:'';position:absolute;left:calc(-1 * var(--rail) + 20px);top:10px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2.5px solid var(--acc-ink);z-index:6}
-@media (max-width:920px){.stn-anchor::before{display:none}}
+.cmp{position:fixed;left:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:10px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .3s,transform .3s,visibility .3s}
+.cmp.on{opacity:1;visibility:visible;transform:none}
+.cmp-btn{width:46px;height:46px;border-radius:50%;border:0;padding:0;background:var(--sur);box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s}
+.cmp-btn:hover{transform:translateY(-3px)}
+.cmp-btn svg{width:46px;height:46px;display:block}
+.cmp-btn .tr{stroke:var(--line2)}
+.cmp-btn .pr{stroke:var(--acc-ink);transition:stroke-dashoffset .12s linear}
+.cmp-btn .ad{fill:var(--acc)}
+.cmp-lb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);background:var(--sur);border:1px solid var(--line);border-radius:20px;padding:7px 13px;box-shadow:var(--shadow);white-space:nowrap;opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s;pointer-events:none}
+.cmp-lb i{font-style:normal;color:var(--acc-ink)}
+.cmp:hover .cmp-lb,.cmp-btn:focus-visible~.cmp-lb,.cmp.say .cmp-lb{opacity:1;transform:none}
+@media (max-width:720px){.cmp{display:none}}
 
 /* ══ header ══ */
 .hd{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -350,10 +358,7 @@ a{color:inherit}
 
 /* ══ footer terminus ══ */
 .ft{border-top:1px solid var(--line);margin-top:clamp(40px,6vw,80px);position:relative}
-.ft-line{max-width:var(--max);margin:0 auto;padding:0 var(--gut);position:relative}
-.ft-line::before{content:'';position:absolute;left:calc(var(--gut) + 26px);top:0;height:clamp(48px,7vw,90px);width:2px;background:var(--acc-ink)}
-.ft-line::after{content:'';position:absolute;left:calc(var(--gut) + 20px);top:clamp(48px,7vw,90px);width:14px;height:14px;border-radius:50%;background:var(--acc-ink);box-shadow:0 0 0 5px var(--ghost)}
-@media (max-width:920px){.ft-line::before,.ft-line::after{display:none}}
+.ft-line{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
 .ft-tag{padding:clamp(64px,9vw,120px) 0 clamp(36px,4vw,56px)}
 .ft-tag .d1{font-size:clamp(34px,5vw,68px)}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:34px;padding-bottom:clamp(36px,4vw,56px)}
@@ -431,7 +436,7 @@ a{color:inherit}
 .cp-ft kbd{border:1px solid var(--line2);border-radius:4px;padding:1px 5px;margin-right:4px}
 
 @media print{
-  .hd,.wa,.skip,.mbt,.msh,.mer,.thm,.mq,.rail-ui,.cp,.cpb,.sig-load{display:none !important}
+  .hd,.wa,.skip,.mbt,.msh,.cmp,.thm,.mq,.rail-ui,.cp,.cpb,.sig-load{display:none !important}
   body{background:#fff;color:#000}
   .sec,.ph{padding:18px 0}
 }

@@ -62,18 +62,55 @@ if('IntersectionObserver' in window){
   rvs.forEach(function(e){rio.observe(e);});
 }else{rvs.forEach(function(e){e.classList.add('in');});}
 
-/* meridian scroll progress */
-var mer=document.querySelector('.mer .mer-fill');
-if(mer){
-  var mtick=false;
-  function merUpd(){
+/* signal compass: scroll-progress ring + station announcer */
+(function(){
+  var R=15,C=2*Math.PI*R;
+  var cmp=document.createElement('div');
+  cmp.className='cmp';
+  cmp.innerHTML='<button type="button" class="cmp-btn" aria-label="Scroll progress — back to top">'+
+    '<svg viewBox="0 0 46 46" aria-hidden="true">'+
+    '<circle class="tr" cx="23" cy="23" r="'+R+'" fill="none" stroke-width="2.5"/>'+
+    '<circle class="pr" cx="23" cy="23" r="'+R+'" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 23 23)"/>'+
+    '<circle class="ad" cx="23" cy="23" r="4.5"/></svg></button>'+
+    '<span class="cmp-lb" aria-hidden="true"></span>';
+  document.body.appendChild(cmp);
+  var pr=cmp.querySelector('.pr'),lb=cmp.querySelector('.cmp-lb');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stns=[].map.call(document.querySelectorAll('.stn-anchor'),function(a){
+    var l=a.querySelector('.stn');
+    return{el:a,txt:l?l.textContent.replace(/\s+/g,' ').trim():''};
+  }).filter(function(s){return s.txt;});
+  var cur=-1,sayT=null,tick=false;
+  function upd(){
+    tick=false;
     var h=document.documentElement.scrollHeight-window.innerHeight;
-    mer.style.transform='scaleY('+(h>0?Math.min(window.scrollY/h,1):0)+')';
-    mtick=false;
+    var p=h>0?Math.min(window.scrollY/h,1):0;
+    pr.style.strokeDashoffset=String(C*(1-p));
+    cmp.classList.toggle('on',window.scrollY>140);
+    var k=-1;
+    for(var i=0;i<stns.length;i++){if(stns[i].el.getBoundingClientRect().top<window.innerHeight*.45)k=i;}
+    if(k!==cur){
+      cur=k;
+      var t=k>=0?stns[k].txt:(document.title.split('—')[1]||'Top of the line').trim();
+      lb.innerHTML='';
+      t.split('·').forEach(function(part,n){
+        if(n){var i2=document.createElement('i');i2.textContent=' · ';lb.appendChild(i2);}
+        lb.appendChild(document.createTextNode(part.trim()));
+      });
+      if(!reduce){
+        cmp.classList.add('say');
+        if(sayT)clearTimeout(sayT);
+        sayT=setTimeout(function(){cmp.classList.remove('say');},1800);
+      }
+    }
   }
-  window.addEventListener('scroll',function(){if(!mtick){mtick=true;requestAnimationFrame(merUpd);}},{passive:true});
-  merUpd();
-}
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+  cmp.querySelector('.cmp-btn').addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  });
+})();
 
 /* rotating word (hero) */
 var rot=document.getElementById('rot');

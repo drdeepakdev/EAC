@@ -11,8 +11,10 @@ Outsourcing.
 ## Design — "The Meridian" (v5, multi-page)
 
 The current site is a full multi-page build — "The Meridian" — documented in
-`DIRECTIONS.md`: the brand's red signal line drawn continuously through the
-site, every page a station. Eight dedicated pages (home, services, projects,
+`DIRECTIONS.md`: every page a station on the brand's signal line, marked by
+a scroll-progress **signal compass** (bottom-left) that names each station
+as you pass it and returns you to the top of the line. Eight dedicated
+pages (home, services, projects,
 about, clients, news, innovation, contact) share one design system
 (`assets/site.css` / `site.js`) with mega menus, horizontal snap rails,
 big and inner banners, a kinetic hero, an interactive Capability Atlas, and
