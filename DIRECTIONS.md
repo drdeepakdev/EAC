@@ -162,3 +162,11 @@ service and project sections.
   chrome for websites, phone for apps, bezier pen for logos, megaphone
   for brands) behind a smaller corner monogram — the 26 cards no longer
   share one repeated treatment.
+
+## v5.4 — station rails, Infosys hover (client-directed, current)
+Station 01 and 02 rails now show exactly three boxes per view on
+desktop (two on tablet, one on phone) — no half-cut cards. Card hover
+borrows the Infosys tile language: a brand-red fill sweeps up from the
+bottom of the card, typography flips to white, the Explore arrow slides
+right; project cards zoom their art and slide an arrow into the
+red-swept caption strip.
