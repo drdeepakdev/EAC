@@ -218,3 +218,34 @@ Accenture/Infosys-directed round:
   process mapping, workflow digitisation, ERP/CRM, integration, AI
   assistants and automation — with its own anchored section, rail
   card, mega-menu entry, palette entry and handmade icon.
+
+## v6.2 — the orchestrated polish (agent-advised, current)
+Three specialist reviews (brand cohesion, UX/interaction, visual craft)
+ran in parallel; their recommendations were implemented alongside the
+client's asks:
+
+- **Exact-opposite themes** — the banners now invert with the theme:
+  light mode keeps the dark cinematic banners; dark mode flips them to
+  porcelain plates (a full light-variant art set, generated in the same
+  brand palette) with dark type. White-in-black, black-in-white.
+- **Wide floating mega menus** — 780px two-column panels with backdrop
+  blur, a pointer notch, per-item handmade icons, a red signal bar that
+  draws on hover, and mono station labels on the Company menu too.
+- **Overlap fixed** — the back-to-top control is now anchored at the
+  footer bar's right edge, and the signal compass fades out entirely
+  while the footer is on screen.
+- **UX/accessibility round** (agent-advised): persistent play/pause on
+  the hero carousel, focus traps in all three dialogs, combobox
+  semantics + aria-activedescendant + live result counts in Signal
+  Search, role=alert + aria-invalid + a theme-aware --err token on
+  forms, home project cards now browse the portfolio, grid tiles say
+  "Enquire →" honestly, compass announcements mirrored to a live region.
+- **Visual craft round** (agent-advised): each case cover now has its
+  own generative gesture (EKG steps, perspective grid, meridian arc,
+  node constellation, bold diagonal), the first case study is a
+  double-width feature card, film grain overlays the dark banners, and
+  the hero ghost glyph crops boldly off the top edge.
+- **Brand weave** (agent-advised): every aim-dot instance carries its
+  halo, text selection uses the theme-correct red, the WhatsApp fab is
+  brand-red at rest with the aim-dot ring, and the browser theme-color
+  meta is dark-scheme aware before JS loads.
