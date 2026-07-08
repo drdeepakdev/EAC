@@ -137,3 +137,28 @@ after you start scrolling; hidden on small screens and in print. The
 inline station dots and the "End of line" terminus label remain — the
 line itself is now something you carry, not something drawn over the
 page.
+
+## v5.3 — the AI signal round (client-directed, current)
+Brief: highlight the "Ai" inside ExpertAims like an AI development
+company, bring back a long banner slider with effects, and beautify the
+service and project sections.
+
+- **The "Ai" treatment** — no badge, no sticker: the lockup's own
+  letterforms carry it. A light sweep travels through the logo (masked
+  by the logo itself), the A–i pair breathes with a living red gradient
+  (which also lands on the word TECHNOLOGY in the strapline), and the
+  i-dot pings like a radar signal. Pure CSS over the existing SVG,
+  theme-aware, removed entirely under reduced motion.
+- **Hero banner slider** — five full-height slides: the flagship
+  "Technology that holds.", the AI & automation practice, cloud
+  migrations, security, and web builds. Each slide has drifting
+  conic-gradient art, a masked dot-field and a giant outlined ghost
+  glyph (EA · AI · M365 · SEC · WEB). Autoplays with per-dot progress
+  bars, pauses on hover/focus/hidden-tab, arrows + dots + swipe +
+  keyboard, staggered text reveals, and a static trust bar beneath.
+- **Service cards** — bespoke line-art icons per practice, an outlined
+  ghost numeral, and a red top rule that draws itself on hover.
+- **Project cards** — bespoke line-art motifs per category (browser
+  chrome for websites, phone for apps, bezier pen for logos, megaphone
+  for brands) behind a smaller corner monogram — the 26 cards no longer
+  share one repeated treatment.
