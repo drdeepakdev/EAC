@@ -106,3 +106,21 @@ Capability Atlas), and contact (channels, three offices with map links,
 form, FAQ). Content migrated from the live expertaims.com; mega menus on
 desktop, accordion sheet on mobile; WhatsApp everywhere. Prior versions
 remain at v1–v4.html.
+
+## v5.1 — innovation round (current)
+Three additions, each an extension of the meridian concept rather than a
+bolt-on effect:
+
+- **Signal Search** — a command palette (Ctrl/⌘ K, `/`, or the header
+  Search button) indexing every page, all six services, offices and
+  actions (WhatsApp, email, theme switch). Keyboard-first: arrows,
+  Enter, Escape; the aim-dot is the selection marker. Built entirely in
+  shared JS — no per-page markup — and styled in both themes.
+- **Station-to-station transitions** — cross-document View Transitions
+  (progressive enhancement) plus the *signal draw*: a 2px brand-red line
+  that draws across the top edge on every page entry, the meridian
+  handing the visitor from one station to the next. Disabled under
+  `prefers-reduced-motion`.
+- **Aim-dot searchlight** — a soft brand-red spotlight that follows the
+  pointer across service cards and project art (hover-capable, fine
+  pointers only).

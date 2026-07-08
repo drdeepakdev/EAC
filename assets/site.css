@@ -378,8 +378,60 @@ a{color:inherit}
 .skip:focus{top:0}
 :focus-visible{outline:2px solid var(--acc-ink);outline-offset:3px;border-radius:3px}
 
+/* ── v5.1 · page transitions + the signal draw ─────────────────
+   Cross-document view transitions (progressive enhancement) and a
+   red signal line that draws across the top on every page entry —
+   the meridian handing you from station to station. */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vt-out .18s ease both}
+::view-transition-new(root){animation:vt-in .26s ease both}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0;transform:translateY(6px)}}
+.sig-load{position:fixed;top:0;left:0;right:0;height:2px;z-index:500;pointer-events:none;background:linear-gradient(90deg,var(--acc),var(--acc-ink));transform:scaleX(0);transform-origin:0 50%;animation:sig-draw .9s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes sig-draw{0%{transform:scaleX(0);opacity:1}62%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  .sig-load{display:none}
+}
+
+/* ── v5.1 · pointer spotlight on cards ─────────────────────────
+   A soft brand-red glow follows the cursor across service cards
+   and project art — the aim-dot as a searchlight. */
+.svc::after,.pj-art::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--mx,50%) var(--my,42%),var(--ghost) 0%,transparent 72%)}
+.svc:hover::after,.pj:hover .pj-art::after{opacity:1}
+@media (hover:none){.svc::after,.pj-art::after{display:none}}
+
+/* ── v5.1 · Signal Search (command palette, Ctrl/⌘ K) ──────────── */
+.cpb{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--line2);border-radius:9px;background:var(--sur);color:var(--mut);font-family:var(--body);font-size:13px;cursor:pointer;transition:border-color .15s,color .15s}
+.cpb:hover{border-color:var(--acc-ink);color:var(--ink)}
+.cpb svg{width:14px;height:14px}
+.cpb kbd{font-family:var(--mono);font-size:10px;letter-spacing:.04em;border:1px solid var(--line2);border-radius:5px;padding:2px 5px;color:var(--mut)}
+@media (max-width:1020px){.cpb{padding:0;width:36px;justify-content:center}.cpb kbd,.cpb .cpb-t{display:none}}
+.cp{position:fixed;inset:0;z-index:450;display:flex;align-items:flex-start;justify-content:center;padding:12vh 18px 18px}
+.cp[hidden]{display:none}
+.cp-bg{position:absolute;inset:0;background:color-mix(in srgb,var(--ink) 32%,transparent);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.cp-box{position:relative;width:min(620px,100%);background:var(--sur);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;animation:cp-in .18s ease}
+@keyframes cp-in{from{opacity:0;transform:translateY(-8px) scale(.985)}}
+.cp-hd{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.cp-hd svg{width:17px;height:17px;color:var(--acc-ink);flex:none}
+.cp-hd input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);font-family:var(--body);font-size:16px}
+.cp-hd input::placeholder{color:var(--mut)}
+.cp-hd kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-radius:5px;padding:3px 6px;color:var(--mut)}
+.cp-ls{max-height:min(48vh,430px);overflow-y:auto;padding:8px}
+.cp-it{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:11px 12px;border:0;border-radius:9px;background:transparent;cursor:pointer;text-decoration:none}
+.cp-it .dot{flex:none;width:8px;height:8px;border-radius:50%;border:2px solid var(--line2);transition:background .12s,border-color .12s}
+.cp-it b{display:block;font-family:var(--body);font-weight:600;font-size:14.5px;color:var(--ink);letter-spacing:-.005em}
+.cp-it span{display:block;font-size:12px;color:var(--mut);margin-top:1px}
+.cp-it .k{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);flex:none}
+.cp-it.on{background:var(--sur2)}
+.cp-it.on .dot{background:var(--acc);border-color:var(--acc)}
+.cp-it.on b{color:var(--acc-ink)}
+.cp-mt{padding:26px 16px;text-align:center;font-size:13.5px;color:var(--mut)}
+.cp-ft{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--mut)}
+.cp-ft kbd{border:1px solid var(--line2);border-radius:4px;padding:1px 5px;margin-right:4px}
+
 @media print{
-  .hd,.wa,.skip,.mbt,.msh,.mer,.thm,.mq,.rail-ui{display:none !important}
+  .hd,.wa,.skip,.mbt,.msh,.mer,.thm,.mq,.rail-ui,.cp,.cpb,.sig-load{display:none !important}
   body{background:#fff;color:#000}
   .sec,.ph{padding:18px 0}
 }

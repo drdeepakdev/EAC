@@ -203,4 +203,142 @@ document.querySelectorAll('form[data-mailto]').forEach(function(f){
     if(note){note.textContent='Your email app has a pre-filled draft — review and send it.';note.style.color='var(--ok)';}
   });
 });
+
+/* ── v5.1 · signal draw on page entry ── */
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  var sig=document.createElement('div');
+  sig.className='sig-load';sig.setAttribute('aria-hidden','true');
+  document.body.appendChild(sig);
+  sig.addEventListener('animationend',function(){sig.remove();});
+}
+
+/* ── v5.1 · pointer spotlight on cards ── */
+if(window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+  document.addEventListener('pointermove',function(e){
+    var c=e.target.closest('.svc,.pj');if(!c)return;
+    var host=c.classList.contains('pj')?(c.querySelector('.pj-art')||c):c;
+    var r=host.getBoundingClientRect();
+    host.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    host.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  },{passive:true});
+}
+
+/* ── v5.1 · Signal Search (command palette) ── */
+(function(){
+  var INDEX=[
+    {t:'Home',d:'The line begins here',u:'index.html',g:'page',k:'home start meridian'},
+    {t:'Services — all six practices',d:'Run · Move · Protect · Build · Grow · Enable',u:'services.html',g:'page',k:'services practices what we do'},
+    {t:'IT Infrastructure & AMC',d:'Networks, servers, maintenance contracts',u:'services.html#s1',g:'service',k:'network servers helpdesk amc hardware infrastructure support'},
+    {t:'Cloud, Microsoft 365 & Google Workspace',d:'Business email and files that follow the team',u:'services.html#s2',g:'service',k:'cloud m365 office email migration google workspace'},
+    {t:'Cybersecurity & Backup',d:'Endpoint, email security, tested backups',u:'services.html#s3',g:'service',k:'security ransomware endpoint backup recovery protect'},
+    {t:'Websites, E-commerce & Apps',d:'Built to convert, handed over documented',u:'services.html#s4',g:'service',k:'website ecommerce app store development build design'},
+    {t:'SEO, Branding & Marketing',d:'Found first, remembered longer',u:'services.html#s5',g:'service',k:'seo brand logo marketing social media growth'},
+    {t:'Training & Workshops',d:'Your team, upskilled on your stack',u:'services.html#s6',g:'service',k:'training workshops learning enable'},
+    {t:'Projects & case studies',d:'26 delivered projects with filters',u:'projects.html',g:'page',k:'portfolio work case studies proof websites apps logos'},
+    {t:'About ExpertAims',d:'Vision, mission, how we work since 2012',u:'about.html',g:'page',k:'company story values respect responsibility ownership'},
+    {t:'Clients & industries',d:'Who trusts us, by sector',u:'clients.html',g:'page',k:'customers industries sectors trust'},
+    {t:'News & insights',d:'Practice notes from the field',u:'news.html',g:'page',k:'articles blog insights reading'},
+    {t:'Innovation & Capability Atlas',d:'Frontier practices, interactive map',u:'innovation.html',g:'page',k:'ai automation atlas future frontier'},
+    {t:'Contact — three offices',d:'Kuwait · India · Malaysia',u:'contact.html',g:'page',k:'contact reach address phone kuwait india malaysia office faq'},
+    {t:'WhatsApp us',d:'+965 9090 8625 · fastest reply',u:'https://wa.me/96590908625',g:'action',k:'whatsapp chat message call now'},
+    {t:'Email info@expertaims.com',d:'Start an enquiry',u:'mailto:info@expertaims.com',g:'action',k:'email mail enquiry write'},
+    {t:'Switch light / dark theme',d:'Follows your OS until you choose',g:'action',k:'theme dark light mode appearance',a:'theme'}
+  ];
+  var acts=document.querySelector('.hd-acts'),thm=document.querySelector('.thm');
+  var mac=/Mac|iPhone|iPad/.test(navigator.platform||'');
+  if(acts&&thm){
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='cpb';btn.setAttribute('aria-label','Search the site (keyboard: '+(mac?'Command':'Control')+' K)');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg><span class="cpb-t">Search</span><kbd>'+(mac?'⌘':'Ctrl')+' K</kbd>';
+    acts.insertBefore(btn,thm);
+  }
+  var cp,inp,ls,items=[],sel=0,lastFocus=null;
+  function build(){
+    cp=document.createElement('div');
+    cp.className='cp';cp.hidden=true;
+    cp.setAttribute('role','dialog');cp.setAttribute('aria-modal','true');cp.setAttribute('aria-label','Site search');
+    cp.innerHTML='<div class="cp-bg" data-close></div>'+
+      '<div class="cp-box"><div class="cp-hd">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>'+
+      '<input type="text" placeholder="Search pages, services, actions…" aria-label="Search" autocomplete="off" spellcheck="false">'+
+      '<kbd data-close role="button" tabindex="0" aria-label="Close search">ESC</kbd></div>'+
+      '<div class="cp-ls" role="listbox" aria-label="Results"></div>'+
+      '<div class="cp-ft"><span><kbd>↑↓</kbd>navigate</span><span><kbd>↵</kbd>open</span><span><kbd>esc</kbd>close</span></div></div>';
+    document.body.appendChild(cp);
+    inp=cp.querySelector('input');ls=cp.querySelector('.cp-ls');
+    inp.addEventListener('input',function(){render(inp.value);});
+    cp.addEventListener('click',function(e){
+      if(e.target.closest('[data-close]')){close();return;}
+      var it=e.target.closest('.cp-it');if(it){e.preventDefault();go(+it.dataset.i);}
+    });
+    cp.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();move(1);}
+      else if(e.key==='ArrowUp'){e.preventDefault();move(-1);}
+      else if(e.key==='Enter'){e.preventDefault();if(items[sel])go(+items[sel].dataset.i);}
+    });
+  }
+  function score(it,q){
+    var hay=(it.t+' '+it.d+' '+it.k).toLowerCase(),s=0;
+    var terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+    for(var i=0;i<terms.length;i++){
+      var w=terms[i];
+      if(it.t.toLowerCase().indexOf(w)===0)s+=5;
+      else if(it.t.toLowerCase().indexOf(w)>-1)s+=3;
+      else if(hay.indexOf(w)>-1)s+=1;
+      else return 0;
+    }
+    return s||1;
+  }
+  function render(q){
+    var res=q.trim()
+      ? INDEX.map(function(it,i){return{it:it,i:i,s:score(it,q)};}).filter(function(r){return r.s>0;}).sort(function(a,b){return b.s-a.s;})
+      : INDEX.map(function(it,i){return{it:it,i:i};});
+    ls.innerHTML='';items=[];sel=0;
+    if(!res.length){ls.innerHTML='<p class="cp-mt">No match — try “backup”, “website” or “WhatsApp”.</p>';return;}
+    res.forEach(function(r,n){
+      var el=document.createElement(r.it.u?'a':'button');
+      el.className='cp-it'+(n===0?' on':'');
+      el.setAttribute('role','option');el.dataset.i=r.i;
+      if(r.it.u){el.href=r.it.u;}else{el.type='button';}
+      el.innerHTML='<span class="dot" aria-hidden="true"></span><span><b></b><span></span></span><span class="k"></span>';
+      el.querySelector('b').textContent=r.it.t;
+      el.querySelector('span span').textContent=r.it.d;
+      el.querySelector('.k').textContent=r.it.g;
+      ls.appendChild(el);items.push(el);
+    });
+  }
+  function move(d){
+    if(!items.length)return;
+    items[sel].classList.remove('on');
+    sel=(sel+d+items.length)%items.length;
+    items[sel].classList.add('on');
+    items[sel].scrollIntoView({block:'nearest'});
+  }
+  function go(i){
+    var it=INDEX[i];
+    if(it.a==='theme'){close();var t=document.querySelector('.thm');if(t)t.click();return;}
+    close();window.location.href=it.u;
+  }
+  function open(){
+    if(!cp)build();
+    lastFocus=document.activeElement;
+    cp.hidden=false;document.body.style.overflow='hidden';
+    inp.value='';render('');inp.focus();
+  }
+  function close(){
+    if(!cp||cp.hidden)return;
+    cp.hidden=true;document.body.style.overflow='';
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  document.addEventListener('click',function(e){if(e.target.closest('.cpb'))open();});
+  document.addEventListener('keydown',function(e){
+    if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();cp&&!cp.hidden?close():open();return;}
+    if(e.key==='Escape')close();
+    if(e.key==='/'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+      var t=e.target;
+      if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;
+      e.preventDefault();open();
+    }
+  });
+})();
 })();
