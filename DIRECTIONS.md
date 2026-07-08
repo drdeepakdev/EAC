@@ -170,3 +170,28 @@ borrows the Infosys tile language: a brand-red fill sweeps up from the
 bottom of the card, typography flips to white, the Explore arrow slides
 right; project cards zoom their art and slide an arrow into the
 red-swept caption strip.
+
+## v6.0 — the master cut (client-directed, current)
+Brief: the real numbers are 15,000+ projects and 5,000+ clients; deepen
+the case studies; high-resolution imagery and handmade icons; more
+interactivity; no AI slop.
+
+- **True scale** — every stat corrected site-wide: 15,000+ projects
+  delivered, 5,000+ clients since 2012. The 26-item portfolio is now
+  framed honestly as "the public selection."
+- **High-resolution art plates** — eleven 1600px/1400px WebP artworks
+  generated deterministically in the brand palette (calm charcoal
+  fields, ember glows, grain) with hand-drawn motifs: the meridian arc,
+  a neural constellation, a rising migration path, radar rings, a
+  perspective grid, and per-case signal curves. Hero slides carry them
+  as tilted art prints with pointer tilt; case cards use them as
+  covers. ~12KB each — high-res without the weight.
+- **Case files** — six full case studies (Kidz, 3QARQ8, Onetech,
+  Clinic, Al Mohsen Group, Artech Q8) in a modal reader: challenge →
+  approach → outcome with handmade section icons (flag, route, target),
+  a three-stat strip and a stack chip row. Teaser band on the home page.
+- **Handmade icon signature** — every service icon now carries the
+  brand's filled aim-dot; case-reader icons drawn in the same hand.
+- **Interactivity** — pointer tilt on hero plates and case covers,
+  comma-formatted count-ups (15,000), cover zooms, and the existing
+  palette/compass/sweep system carried through.
