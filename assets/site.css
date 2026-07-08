@@ -592,6 +592,78 @@ a{color:inherit}
 /* handmade icon signature: the aim-dot inside every icon */
 .svc .ic svg .dt{fill:currentColor;stroke:none}
 
+/* ── v6.1 · huge full-bleed hero banners ───────────────────────
+   The banner is its own dark world in both themes: tokens are
+   re-scoped so every child (station label, type, buttons, dots)
+   adapts without per-element overrides. */
+.hb{--ink:#F0EDE8;--ink2:#DAD3CD;--mut:#B3AAA6;--acc-ink:#FF5A4E;--line:#332B2C;--line2:#4A4040;--ghost:rgba(255,90,78,.08);background:#100B0C;border-bottom:0;color:var(--ink)}
+.hb-t{min-height:clamp(560px,74vh,800px)}
+.hb-art .bg{position:absolute;inset:0}
+.hb-art .bg img{width:100%;height:100%;object-fit:cover;display:block;animation:hb-kb 16s ease-in-out infinite alternate}
+@keyframes hb-kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hb-art .sh{position:absolute;inset:0;background:linear-gradient(98deg,rgba(12,7,8,.93) 20%,rgba(12,7,8,.62) 52%,rgba(12,7,8,.22) 82%),linear-gradient(rgba(12,7,8,0) 62%,rgba(12,7,8,.72))}
+.hb-art .ga,.hb-art .gb{display:none}
+.hb-art .gg{-webkit-text-stroke-color:rgba(240,237,232,.16)}
+.hb .btn-ln{color:#F0EDE8}
+.hb-ar{background:rgba(240,237,232,.07)}
+.hb-ar:hover{background:rgba(240,237,232,.14)}
+.hb-d{background:#463C3D}
+.cpb{flex:none}
+@media (prefers-reduced-motion:reduce){.hb-art .bg img{animation:none}}
+
+/* ── v6.1 · inner-page banners ── */
+.ph-band{--ink:#F0EDE8;--ink2:#DAD3CD;--mut:#B3AAA6;--acc-ink:#FF5A4E;--line:#332B2C;--ghost:rgba(255,90,78,.08);background:#100B0C;border-bottom:0;color:var(--ink)}
+.ph-band .ph-bg{position:absolute;inset:0}
+.ph-band .ph-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.ph-band .ph-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(98deg,rgba(12,7,8,.93) 24%,rgba(12,7,8,.6) 58%,rgba(12,7,8,.28)),linear-gradient(rgba(12,7,8,0) 55%,rgba(12,7,8,.65))}
+.ph-band .ph-ghost{-webkit-text-stroke-color:rgba(240,237,232,.14)}
+.ph-band .wrap{position:relative;z-index:2}
+.ph-band{padding:clamp(84px,10vw,150px) 0 clamp(56px,7vw,96px)}
+
+/* ── v6.1 · header logo: E-mark first, full lockup on scroll/hover ── */
+.hd-logo{width:178px;height:40px;display:flex;align-items:center}
+.hd-logo .lg-s,.hd-logo .lg-f{position:absolute;left:0;top:50%;transform:translateY(-50%);display:flex;transition:opacity .32s ease,transform .32s ease}
+.hd-logo .lg-s img{height:34px;width:auto}
+.hd-logo .lg-f img{height:30px;width:auto}
+.hd-logo .lg-f{opacity:0;transform:translateY(-50%) translateX(-8px);pointer-events:none}
+.hd.exp .hd-logo .lg-f,.hd-logo:hover .lg-f,.hd-logo:focus-visible .lg-f{opacity:1;transform:translateY(-50%)}
+.hd.exp .hd-logo .lg-s,.hd-logo:hover .lg-s,.hd-logo:focus-visible .lg-s{opacity:0;transform:translateY(-50%) translateX(8px)}
+.lg-f{position:relative}
+@media (prefers-reduced-motion:reduce){.hd-logo .lg-s,.hd-logo .lg-f{transition:none}}
+
+/* ── v6.1 · floating panels (Infosys-style) on projects & cases ── */
+.cs{background:transparent;border:0;overflow:visible}
+.cs:hover{box-shadow:none;border-color:transparent;transform:translateY(-6px)}
+.cs-cover{border-radius:var(--r);box-shadow:var(--shadow)}
+.cs-cover,.cs-cover img{border-radius:var(--r)}
+.cs-b{position:relative;z-index:2;background:var(--sur);border:1px solid var(--line);border-radius:12px;margin:-46px 14px 0;box-shadow:var(--shadow);transition:border-color .2s}
+.cs:hover .cs-b{border-color:var(--acc)}
+@media (prefers-reduced-motion:no-preference){
+  .cs-grid .cs:nth-child(odd) .cs-cover{animation:lev 7s ease-in-out infinite alternate}
+  .cs-grid .cs:nth-child(even) .cs-cover{animation:lev 8.5s ease-in-out 1.2s infinite alternate}
+}
+@keyframes lev{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+.pj{overflow:visible;border:0;background:transparent}
+.pj:hover{box-shadow:none;border-color:transparent}
+.pj-art{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.pj-art .mk{padding-bottom:50px}
+.pj-b{margin:-40px 12px 0;border:1px solid var(--line);border-radius:10px;z-index:2;box-shadow:var(--shadow)}
+.pj:hover .pj-b{border-color:var(--acc)}
+
+/* ── v6.1 · footer: watermark, animated E-mark, back to top ── */
+.ft{position:relative;overflow:hidden}
+.ft-ghost{position:absolute;right:-3%;bottom:-10%;font-family:var(--disp);font-weight:800;font-size:clamp(200px,26vw,380px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--acc-ink) 14%,transparent);pointer-events:none;user-select:none}
+.ft-line,.ft-grid,.ft-bar{position:relative;z-index:2}
+.ft-tag{display:flex;justify-content:space-between;align-items:flex-start;gap:26px;flex-wrap:wrap}
+.ft-mark{position:relative;width:clamp(74px,8vw,104px);flex:none;animation:lev 6s ease-in-out infinite alternate}
+.ft-mark img{width:100%;height:auto}
+.ft-mark .lg-ping{left:87%;top:13%}
+@media (prefers-reduced-motion:reduce){.ft-mark{animation:none}}
+@media (max-width:720px){.ft-mark{display:none}}
+.ft-top{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);background:var(--sur);color:var(--ink2);border-radius:999px;padding:9px 18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s,transform .2s}
+.ft-top:hover{border-color:var(--acc-ink);color:var(--acc-ink);transform:translateY(-2px)}
+.ft-top svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
 @media print{
   .hd,.wa,.skip,.mbt,.msh,.cmp,.thm,.mq,.rail-ui,.cp,.cpb,.sig-load{display:none !important}
   body{background:#fff;color:#000}

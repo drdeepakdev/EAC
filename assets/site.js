@@ -261,7 +261,7 @@ if(window.matchMedia('(hover: hover) and (pointer: fine)').matches){
 }
 
 /* ── v5.3 · "Ai" logo effect ── */
-document.querySelectorAll('.hd-logo').forEach(function(lg){
+document.querySelectorAll('.hd-logo .lg-f').forEach(function(lg){
   var fx=document.createElement('span');
   fx.className='lg-fx';fx.setAttribute('aria-hidden','true');
   fx.innerHTML='<i class="ai"></i><i class="shine"></i>';
@@ -269,6 +269,22 @@ document.querySelectorAll('.hd-logo').forEach(function(lg){
   var pg=document.createElement('span');
   pg.className='lg-ping';pg.setAttribute('aria-hidden','true');
   lg.appendChild(pg);
+});
+
+/* ── v6.1 · header logo expands on scroll ── */
+(function(){
+  var hd=document.querySelector('.hd');if(!hd)return;
+  var tick=false;
+  function upd(){hd.classList.toggle('exp',window.scrollY>90);tick=false;}
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});
+  upd();
+})();
+
+/* ── v6.1 · back to top ── */
+document.addEventListener('click',function(e){
+  if(!e.target.closest('[data-top]'))return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
 });
 
 /* ── v5.3 · hero banner slider ── */
@@ -341,10 +357,11 @@ if(hb){
     s3:'<path d="M24 6 38 11v11c0 9.5-6 15.6-14 20-8-4.4-14-10.5-14-20V11Z"/><path d="m17 23 5 5 9.5-10"/><circle class="dt" cx="38" cy="9" r="2.6"/>',
     s4:'<rect x="6" y="9" width="36" height="28" rx="3"/><path d="M6 17h36"/><circle cx="11.5" cy="13" r="1.3"/><circle cx="16.5" cy="13" r="1.3"/><path d="m19 30 -5-4.5 5-4.5M29 21l5 4.5-5 4.5"/><circle class="dt" cx="40" cy="13" r="2.6"/>',
     s5:'<path d="M8 38V22m10 16V14m10 24V26m10 12V8"/><path d="M30 8h8v8"/><circle class="dt" cx="38" cy="8" r="2.6"/>',
+    s7:'<path d="M38 24a14 14 0 1 1-4.1-9.9M38 24v-8m0 8h-8"/><path d="M19 24l4 4 7-8"/><circle class="dt" cx="38" cy="10" r="2.6"/>',
     s6:'<path d="M24 8 42 16l-18 8L6 16Z"/><path d="M13 20v10c0 3 5 6 11 6s11-3 11-6V20"/><path d="M42 16v10"/><circle class="dt" cx="42" cy="28.5" r="2.4"/>'
   };
   document.querySelectorAll('a.svc').forEach(function(c){
-    var m=(c.getAttribute('href')||'').match(/#(s[1-6])/);
+    var m=(c.getAttribute('href')||'').match(/#(s[1-7])/);
     if(!m||!IC[m[1]])return;
     var ic=document.createElement('span');
     ic.className='ic';ic.setAttribute('aria-hidden','true');
@@ -427,6 +444,7 @@ if(window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.ma
     {t:'Websites, E-commerce & Apps',d:'Built to convert, handed over documented',u:'services.html#s4',g:'service',k:'website ecommerce app store development build design'},
     {t:'SEO, Branding & Marketing',d:'Found first, remembered longer',u:'services.html#s5',g:'service',k:'seo brand logo marketing social media growth'},
     {t:'Training & Workshops',d:'Your team, upskilled on your stack',u:'services.html#s6',g:'service',k:'training workshops learning enable'},
+    {t:'Digital Transformation',d:'Workflows digitised, AI put to work',u:'services.html#s7',g:'service',k:'digital transformation automation workflow erp crm integration ai paperless'},
     {t:'Projects & case studies',d:'26 delivered projects with filters',u:'projects.html',g:'page',k:'portfolio work case studies proof websites apps logos'},
     {t:'About ExpertAims',d:'Vision, mission, how we work since 2012',u:'about.html',g:'page',k:'company story values respect responsibility ownership'},
     {t:'Clients & industries',d:'Who trusts us, by sector',u:'clients.html',g:'page',k:'customers industries sectors trust'},

@@ -195,3 +195,26 @@ interactivity; no AI slop.
 - **Interactivity** — pointer tilt on hero plates and case covers,
   comma-formatted count-ups (15,000), cover zooms, and the existing
   palette/compass/sweep system carried through.
+
+## v6.1 — huge banners, living footer, transform practice (client-directed, current)
+Accenture/Infosys-directed round:
+
+- **Full-bleed hero banners** — the slider is now a huge dark banner in
+  both themes: art plates cover the full viewport width under a text
+  shade, tokens re-scoped so all chrome adapts, slow Ken Burns drift.
+- **Inner-page banners** — every inner page opens with its own
+  full-width dark banner (art plate + shade + outlined ghost glyph).
+- **Header logo choreography** — the compact E-mark greets you at the
+  top of the line; scrolling (or hovering) expands it into the full
+  lockup, crossfaded. The Ai gradient/sheen/ping live on the full mark.
+- **Living footer** — the E-mark floats beside the terminus statement
+  with the radar ping on its aim-dot, a giant outlined EA watermark
+  sits behind the columns, and a mono "Back to top" pill rides the
+  bottom bar.
+- **Floating cards (Infosys)** — project and case cards became
+  image-first tiles with white info panels floating over the cover
+  edge; case covers levitate gently on alternating rhythms.
+- **Digital Transformation** — a seventh practice (07 · Transform):
+  process mapping, workflow digitisation, ERP/CRM, integration, AI
+  assistants and automation — with its own anchored section, rail
+  card, mega-menu entry, palette entry and handmade icon.
